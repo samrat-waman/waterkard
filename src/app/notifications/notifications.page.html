@@ -1,0 +1,41 @@
+<ion-header [translucent]="true" primary>
+	<ion-toolbar color="primary">
+		<ion-buttons *ngIf="!showSearchbar" slot="start">
+			<ion-menu-button color="light"></ion-menu-button>
+		</ion-buttons>
+		<ion-row>
+			<ion-col *ngIf="!showSearchbar" class="col-9">
+				<div class="ion-text mt-3"><h5>Notifications</h5></div>
+			</ion-col>
+			<ion-col>
+				<div class="ion-text-end mt-1">
+					<ion-searchbar
+						*ngIf="showSearchbar"
+						showCancelButton="always"
+						[(ngModel)]="searchedText"
+						(ionChange)="onChangeOfSearch()"
+						(ionCancel)="showSearchbar = false"
+						placeholder="Search"
+					></ion-searchbar>
+					<ion-buttons slot="end">
+						<ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+							<ion-icon slot="icon-only" name="search"></ion-icon>
+						</ion-button>
+					</ion-buttons>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" padding class="background">
+  <ion-list>
+    <ion-item *ngFor="let notification of notifications" lines="none" (click)="showNotification(notification)">
+      <ion-icon name="notifications-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h3>{{notification.title}}</h3>
+        <p>{{notification.description}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

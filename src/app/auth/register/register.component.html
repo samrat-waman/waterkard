@@ -1,0 +1,156 @@
+<ion-content padding>
+	<div
+		style="
+			height: 100%;
+			color: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		"
+		class="imag"
+	>
+		<ion-text align="center">
+			<!-- <h1 style="height: 100%; display: flex; align-items: center; justify-content: center;" >
+      <ion-avatar style="height: 110px; width: 110px;" >
+        <img src="../../../assets/images/2.jpg">
+      </ion-avatar>
+
+    </h1>
+   <h1>ROWaale</h1>
+     <h3>
+      Water Technologies
+    </h3> -->
+			<h1>
+				<ion-card class="ion-padding md">
+					<form #resellerForm="ngForm" id="resellerForm" name="resellerForm">
+						<div text-center>
+							<h3>Create Account</h3>
+							<div class="border-top"></div>
+							<ion-text color="primary">
+								<p class="size-10">I am Water Vendor</p>
+							</ion-text>
+						</div>
+						<div padding>
+							<ion-item>
+								<ion-icon name="person" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="name"
+									type="text"
+									[(ngModel)]="reseller.name"
+									placeholder="Firm/Shop/Company Name"
+									required
+								></ion-input>
+							</ion-item>
+
+							<ion-item>
+								<ion-icon name="earth" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="country"
+									[(ngModel)]="reseller.country"
+									type="text"
+									placeholder="Country"
+								></ion-input>
+							</ion-item>
+
+							<ion-item>
+								<ion-icon name="earth" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="state"
+									type="text"
+									[(ngModel)]="reseller.state"
+									placeholder="State"
+								></ion-input>
+							</ion-item>
+
+							<ion-item>
+								<ion-icon name="earth" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="city"
+									type="text"
+									[(ngModel)]="reseller.city"
+									placeholder="City"
+								></ion-input>
+							</ion-item>
+
+							<ion-item>
+								<ion-icon name="call" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="phone"
+									[(ngModel)]="reseller.phone"
+									type="text"
+									maxlength="10"
+									placeholder="Phone Number"
+									required
+								></ion-input>
+							</ion-item>
+							<!--  -->
+							<ion-item>
+								<ion-icon name="mail" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="email"
+									type="email"
+									[(ngModel)]="reseller.email"
+									placeholder="Email"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-icon name="lock-closed" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="password"
+									type="password"
+									[(ngModel)]="reseller.password"
+									placeholder="Password"
+									required
+								></ion-input>
+							</ion-item>
+
+							<ion-item>
+								<ion-icon name="lock-closed" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									name="password"
+									[(ngModel)]="reseller.confirm_password"
+									type="password"
+									placeholder="Confirm Password"
+									required
+								></ion-input>
+							</ion-item>
+							<div *ngIf="show">
+								<span class="text-danger">Password are not matching</span>
+							</div>
+						</div>
+						<div padding>
+							<ion-button
+								class="ion-margin-top md"
+								size="medium"
+								type="submit"
+								(click)="onClickOfSignup(resellerForm)"
+								>Signup</ion-button
+							>
+						</div>
+						<!-- <p class="size-10"><a>Forgot Password ?</a></p> -->
+						<!-- <p style="font-size: 12pt;  font-family: Verdana, sans-serif;">To learn more about ROWaale Water <br>Technologies call <a type="tel"> +918888888888</a></p> -->
+					</form>
+				</ion-card>
+			</h1>
+		</ion-text>
+
+		<!-- <ion-card>
+Vendor Login
+</ion-card>
+<ion-card>
+Driver Login
+</ion-card>
+
+<ion-card>
+  Create Account
+</ion-card> -->
+	</div>
+</ion-content>

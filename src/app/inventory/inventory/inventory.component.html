@@ -1,0 +1,252 @@
+<ion-header [translucent]="true" primary>
+  <ion-toolbar color="primary" class="background">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col class="col-10">
+        <div class="ion-text mt-3"><h5>Inventory</h5></div>
+      </ion-col>
+      <ion-icon
+        class="mt-2"
+        (click)="onClickOfAdd()"
+        name="add-outline"
+        style="zoom: 1.7"
+      ></ion-icon>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen="true" padding class="">
+  <ion-toolbar>
+    <div class="row">
+      <div class="col m-4">
+        <ion-item>
+          <ion-label position="fixed">Driver</ion-label>
+          <ion-select
+            interface="popover"
+            [value]="inventory.driver_user_id"
+            (ionChange)="getValue($event)"
+            placeholder="Select Driver"
+          >
+            <ion-select-option
+              *ngFor="let item of drivers"
+              value="{{ item.user_id }}"
+              >{{ item.name }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="fixed">Date</ion-label>
+          <ion-input
+            type="date"
+            #myDate
+            max="{{ today }}"
+            [value]="inventory.date | date: 'yyyy-MM-dd'"
+            required
+            (input)="parseDate($event.target.value)"
+          ></ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <ion-card-header
+      *ngIf="showInventoryDetails"
+      class="mt-2"
+      style="padding: 10px; font-size: 0.8em"
+    >
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-text color="dark"> Total Jar Loaded </ion-text>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col class="ion-text-end">
+          <ion-text color="dark"> Delivered jar </ion-text>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col class="ion-text-end">
+          <ion-text color="dark"> Returned filled jar </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            <img
+              src="../../../assets/images/truckload1.png"
+              height="25"
+              width="25"
+            />
+          </div>
+        </ion-col>
+        <ion-col
+          class="ion-text-end"
+          style="
+            margin: auto;
+            display: block;
+            text-align: center !important;
+            font-size: medium;
+          "
+        >
+          <ion-text color="dark">
+            <div>
+              <b>{{ inventoryDetails.today_loaded }}</b>
+            </div>
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <div class="ion-text-center ion-padding-top">
+            <ion-icon
+              name="arrow-forward"
+              color="secondary"
+              style="zoom: 1.7"
+            ></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col
+          class="ion-text-end"
+          style="
+            margin: auto;
+            display: block;
+            text-align: center !important;
+            font-size: medium;
+          "
+        >
+          <ion-text color="dark">
+            <div>
+              <b>{{ inventoryDetails.today_delivered }}</b>
+            </div>
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <div class="ion-text-center ion-padding-top">
+            <ion-icon
+              name="arrow-forward"
+              color="secondary"
+              style="zoom: 1.7"
+            ></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col
+          class="ion-text-end"
+          style="
+            margin: auto;
+            display: block;
+            text-align: center !important;
+            font-size: medium;
+          "
+        >
+          <ion-text color="dark">
+            <div>
+              <b>{{ inventoryDetails.today_return_filled }}</b>
+            </div>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col>
+          <div class="ion-text-center">
+            <ion-icon
+              name="arrow-down"
+              color="secondary"
+              style="zoom: 1.7"
+            ></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-text color="dark"> Actual Jar Unloaded </ion-text>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col class="ion-text-end">
+          <ion-text color="dark"> Calculated Jar Unloaded </ion-text>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col class="ion-text-end">
+          <ion-text color="dark"> Collected Empty Jar </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            <img
+              src="../../../assets/images/truckunload1.png"
+              height="25"
+              width="25"
+            />
+          </div>
+        </ion-col>
+        <ion-col
+          class="ion-text-end"
+          style="
+            margin: auto;
+            display: block;
+            text-align: center !important;
+            font-size: medium;
+          "
+        >
+          <ion-text color="dark">
+            <div>
+              <b>{{ inventoryDetails.today_calculated_jar_unloaded }}</b>
+            </div>
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <div class="ion-text-center ion-padding-top">
+            <ion-icon
+              name="arrow-back"
+              color="secondary"
+              style="zoom: 1.7"
+            ></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col
+          class="ion-text-end"
+          style="
+            margin: auto;
+            display: block;
+            text-align: center !important;
+            font-size: medium;
+          "
+        >
+          <ion-text color="dark">
+            <div>
+              <b>{{ inventoryDetails.today_calculated_jar_unloaded }}</b>
+            </div>
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <div class="ion-text-center ion-padding-top">
+            <ion-icon
+              name="arrow-back"
+              color="secondary"
+              style="zoom: 1.7"
+            ></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col
+          class="ion-text-end"
+          style="
+            margin: auto;
+            display: block;
+            text-align: center !important;
+            font-size: medium;
+          "
+        >
+          <ion-text color="dark">
+            <div>
+              <b>{{ inventoryDetails.today_empty_collected }}</b>
+            </div>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-toolbar>
+</ion-content>

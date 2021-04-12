@@ -1,0 +1,55 @@
+<ion-header [translucent]="true" primary mode="md">
+	<ion-toolbar color="primary">
+		<ion-buttons *ngIf="!showSearchbar" slot="start">
+			<ion-menu-button color="light"></ion-menu-button>
+		</ion-buttons>
+		<ion-title *ngIf="!showSearchbar">Customer Groups</ion-title>
+		<ion-searchbar class="default-searchbar-margin" mode="ios" *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="searchedText"
+			(ionChange)="onChangeOfSearch()" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
+		<ion-buttons slot="end">
+			<ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+				<ion-icon slot="icon-only" name="search"></ion-icon>
+			</ion-button>
+			<ion-button [hidden]="isDriver" *ngIf="!showSearchbar" (click)="addGroup()">
+				<ion-icon slot="icon-only" name="add-outline" style="zoom: 1.7"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<!-- <ion-card *ngFor="let group of groups" mode="ios">
+			<ion-card-header>
+				<ion-card-subtitle>
+					{{group.group_name}}
+					<ion-checkbox mode="md" color="light"></ion-checkbox>
+				</ion-card-subtitle>
+			</ion-card-header>
+			<ion-card-content>
+				<ion-grid fixed>
+					<ion-row>
+						<ion-col size="4">
+							<p>District</p>
+							<h6>Pune</h6>
+						</ion-col>
+						<ion-col size="4">
+							<p>Locality</p>
+							<h6>Pune</h6>
+						</ion-col>
+						<ion-col size="4">
+							<p>Pin Code</p>
+							<h6>Pune</h6>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</ion-card> -->
+		<ion-item (click)="openGroup(group)" *ngFor="let group of groups">
+			<ion-label>
+				<h3>{{group.group_name}}</h3>
+				<p>Customer count: {{group.group_customers.length}}</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+</ion-content>

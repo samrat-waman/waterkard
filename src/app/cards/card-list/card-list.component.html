@@ -1,0 +1,185 @@
+<ion-header [translucent]="true" primary>
+	<ion-toolbar color="primary" class="background">
+		<ion-buttons *ngIf="!showSearchbar" slot="start">
+			<ion-menu-button color="light"></ion-menu-button>
+		</ion-buttons>
+		<ion-row>
+			<ion-col *ngIf="!showSearchbar" class="col-9">
+				<div class="ion-text mt-3"><h5>Cards</h5></div>
+			</ion-col>
+			<ion-col>
+				<div class="ion-text-end mt-1">
+					<ion-searchbar
+						*ngIf="showSearchbar"
+						showCancelButton="always"
+						[(ngModel)]="searchedText"
+						(ionChange)="onChangeOfSearch()"
+						(ionCancel)="showSearchbar = false"
+						placeholder="Search"
+					></ion-searchbar>
+					<ion-buttons slot="end">
+						<ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+							<ion-icon slot="icon-only" name="search"></ion-icon>
+						</ion-button>
+					</ion-buttons>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" padding class="background">
+	<ion-header translucent>
+		<ion-toolbar>
+			<ion-segment [(ngModel)]="selectedTab">
+				<ion-segment-button value="regular">
+					<ion-label>Regular Customer</ion-label>
+				</ion-segment-button>
+				<ion-segment-button value="event-organiser">
+					<ion-label>Event Organiser</ion-label>
+				</ion-segment-button>
+			</ion-segment>
+
+			<ion-card *ngFor="let item of customers">
+				<ion-card-header>
+					<ion-row>
+						<ion-col size="10">
+							<a
+								href="tel:+91-{{ item.customer_user.phone }}"
+								class="button button-positive"
+							>
+								<ion-icon name="call" style="zoom: 1.6" color="primary">
+								</ion-icon>
+							</a>
+							<ion-text
+								style="font-size: larger; color: black; font-weight: 600"
+							>
+								{{ item.customer_user.name | titlecase }}
+							</ion-text>
+						</ion-col>
+						<ion-col>
+							<ion-icon
+								name="add-circle"
+								color="primary"
+								style="zoom: 2"
+								(click)="onClickOfAdd(item.customer_user.user_id)"
+							></ion-icon>
+						</ion-col>
+					</ion-row>
+				</ion-card-header>
+
+				<ion-card-content>
+					<!--  -->
+					<tr>
+						<td>
+							Sold: {{ item.total_sold }} <br />
+							19Ltr
+						</td>
+						<td>
+							Empty: {{ item.total_empty }}<br />
+							19Ltr
+						</td>
+						<td>
+							Balance: {{ item.balance_jar }}<br />
+							19Ltr
+						</td>
+
+						<td>
+							<div
+								*ngIf="
+									item.pending_payment >= 0 && item.advance_payment <= 0;
+									then pendingBlock;
+									else elseAdvance
+								"
+							></div>
+							<ng-template #pendingBlock>
+								<p>
+									<b> Pend. Pay. <br />₹ {{ item.pending_payment }}/- </b>
+								</p></ng-template
+							>
+
+							<ng-template #elseAdvance>
+								<p>
+									<b>
+										<ion-text color="danger">
+											Adv. Pay.<br />₹ {{ item.advance_payment }}/-
+										</ion-text>
+									</b>
+								</p></ng-template
+							>
+						</td>
+					</tr>
+				</ion-card-content>
+			</ion-card>
+			<ion-item class="mt-5"> </ion-item>
+		</ion-toolbar>
+	</ion-header>
+
+	<!-- <ion-footer> Disyoy ka mi </ion-footer> -->
+
+	<div
+		style="position: fixed; bottom: 10px; left: 20px; right: 10px; width: 89%"
+		class="total"
+	>
+		<div style="text-align: center">
+			<ion-card color="dark">
+				<ion-grid>
+					<ion-row>
+						<ion-col>
+							<div>
+								<h6
+									style="
+										font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+									"
+								>
+									Daily Total
+								</h6>
+							</div>
+						</ion-col>
+						<div class="vl"></div>
+						<ion-col>
+							<div>
+								<h6
+									style="
+										font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+									"
+								>
+									Sold<br />
+									{{ dailyTotalSold }}
+								</h6>
+							</div>
+						</ion-col>
+						<div class="vl"></div>
+						<ion-col>
+							<div>
+								<h6
+									style="
+										font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+									"
+								>
+									Empty <br />
+									{{ dailyTotalEmpty }}
+								</h6>
+							</div>
+						</ion-col>
+						<div class="vl"></div>
+
+						<ion-col>
+							<div>
+								<h6
+									style="
+										font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+									"
+								>
+									Balance {{ dailyTotalBalance }}
+								</h6>
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+
+			<!-- <ion-button expand="block">Pair <ion-icon slot="end" name="bluetooth"></ion-icon></ion-button> -->
+		</div>
+	</div>
+</ion-content>

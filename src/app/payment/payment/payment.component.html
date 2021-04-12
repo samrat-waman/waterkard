@@ -1,0 +1,148 @@
+<ion-header [translucent]="true" primary>
+  <ion-toolbar color="primary">
+    <ion-buttons *ngIf="!showSearchbar" slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col *ngIf="!showSearchbar" class="col-9">
+        <div class="ion-text mt-3"><h5>Payments</h5></div>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-end mt-1">
+          <ion-searchbar
+            *ngIf="showSearchbar"
+            showCancelButton="always"
+            [(ngModel)]="searchedText"
+            (ionChange)="onChangeOfSearch()"
+            (ionCancel)="showSearchbar = false"
+            placeholder="Search"
+          ></ion-searchbar>
+          <ion-buttons slot="end">
+            <ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+              <ion-icon slot="icon-only" name="search"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" padding class="background">
+  <ion-header translucent>
+    <ion-toolbar>
+      <ion-card *ngFor="let item of payments">
+        <ion-card-header style="padding: 10px">
+          <ion-row>
+            <ion-col>
+              <ion-text color="dark">
+                <b>
+                  {{ item.customer_user.name | titlecase }}
+                </b>
+              </ion-text>
+            </ion-col>
+            <ion-col class="ion-text-end">
+              <ion-text color="dark">
+                <div *ngIf="item.pending_payment > 0; else elseBlock">
+                  <b> ₹ {{ item.pending_payment }}/- </b>
+                </div>
+                <ng-template #elseBlock
+                  >Advance: {{ item.advance_payment }}</ng-template
+                >
+              </ion-text>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col (click)="addPayment(item.customer_user_id)">
+              <div class="ion-text-center ion-padding-top">
+                <ion-icon
+                  name="wallet"
+                  color="primary"
+                  style="zoom: 1.7"
+                ></ion-icon>
+                <ion-text color="primary">Add <br />Payment</ion-text>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="ion-text-center ion-padding-top">
+                <ion-icon
+                  (click)="
+                    sendRequestForPayment(
+                      item.customer_user_id,
+                      item.customer_user.name
+                    )
+                  "
+                  name="checkmark-done"
+                  color="secondary"
+                  style="zoom: 1.7"
+                ></ion-icon>
+                <ion-text color="secondary"> <br />Request</ion-text>
+              </div>
+            </ion-col>
+            <!-- <ion-col>
+							<div class="ion-text-center ion-padding-top">
+								<ion-icon
+									name="share-social"
+									color="tertiary"
+									style="zoom: 1.7"
+								></ion-icon>
+								<ion-text color="tertiary"><br />Share</ion-text>
+							</div>
+						</ion-col> -->
+            <ion-col>
+              <div class="ion-text-center ion-padding-top">
+                <ion-icon
+                  [routerLink]="['payment-history', item.customer_user_id]"
+                  name="timer"
+                  color="danger"
+                  style="zoom: 1.7"
+                ></ion-icon>
+                <ion-text color="danger"> <br />History</ion-text>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+      </ion-card>
+      <ion-item class="mt-5"> </ion-item>
+    </ion-toolbar>
+  </ion-header>
+  <div
+    style="position: fixed; bottom: 10px; left: 20px; right: 10px; width: 89%"
+    class="total"
+  >
+    <div style="text-align: center">
+      <ion-card color="dark">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">
+              <div>
+                <h6
+                  style="
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  "
+                >
+                  Total Due Payment
+                </h6>
+              </div>
+            </ion-col>
+            <div class="vl"></div>
+            <ion-col>
+              <div>
+                <h6
+                  style="
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  "
+                >
+                  ₹ {{ totalPayment }}/-
+                </h6>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+      <!-- <ion-button expand="block">Pair <ion-icon slot="end" name="bluetooth"></ion-icon></ion-button> -->
+    </div>
+  </div>
+</ion-content>

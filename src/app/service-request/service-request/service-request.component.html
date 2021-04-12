@@ -1,0 +1,62 @@
+<ion-header [translucent]="true" primary>
+  <ion-toolbar color="primary" class="background">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col class="col-9">
+        <div class="ion-text mt-3"><h5>Service Request</h5></div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen="true" padding class="background">
+  <!-- https://stackoverflow.com/questions/56720492/capture-and-upload-image-to-server-using-ionic-4  -->
+  <!-- https://ionicframework.com/docs/native/camera -->
+  <div class="row">
+    <div class="col">
+      <ion-item class="text-center">
+        <ion-label position="fixed">Problem</ion-label>
+        <ion-select interface="popover" placeholder="Select Problem">
+        </ion-select>
+      </ion-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ion-item class="text-center">
+        <ion-label position="fixed">Time</ion-label>
+        <ion-select interface="popover" placeholder="Select Technician Time">
+        </ion-select>
+      </ion-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ion-item class="text-center">
+        <ion-label position="fixed">Description</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-textarea
+          placeholder="Enter more information here..."
+        ></ion-textarea>
+      </ion-item>
+    </div>
+  </div>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <ion-button size="default" color="primary" (click)="onClickOfSubmit()">
+          Submit</ion-button
+        >
+        <ion-button
+          size="default"
+          color="danger"
+          class="ion-margin-horizontal"
+          (click)="onClickOfCancel()"
+          >Cancel</ion-button
+        >
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

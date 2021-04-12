@@ -1,0 +1,22 @@
+.background {
+	background: transparent !important;
+}
+
+td {
+	width: 90px;
+	text-align: center;
+	font-weight: bold;
+	text-size-adjust: 8px;
+	font-size: 13px;
+	color: black;
+}
+
+ion-card-header {
+	height: min-content !important;
+}
+
+.total {
+	--background-color: transparent;
+	--ion-color-base: transparent !important;
+	z-index: 1000;
+}

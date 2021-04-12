@@ -1,0 +1,110 @@
+<div
+  style="
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            <h3><b> Add Order </b></h3>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div class="border-top"></div>
+
+      <ng-container
+        *ngIf="this.show; then thenTemplate; else elseTemplate"
+      ></ng-container>
+      <ng-template #thenTemplate>
+        <ion-item>
+          <ion-label position="fixed">Customer</ion-label>
+          <ion-select
+            interface="popover"
+            [value]="order.customer_user_id"
+            (ionChange)="getValue($event)"
+            placeholder="Select Customer"
+          >
+            <ion-select-option
+              *ngFor="let item of customers"
+              value="{{ item.user_id }}"
+              >{{ item.name }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="fixed">Product</ion-label>
+          <ion-select
+            interface="popover"
+            [value]="order.product_id"
+            (ionChange)="getProductID($event)"
+            placeholder="Select Product"
+          >
+            <ion-select-option
+              *ngFor="let item of products"
+              value="{{ item.product.product_id }}"
+              >{{ item.product.name }}{{ item.product.unit }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ng-template>
+      <ng-template #elseTemplate>
+        <ion-item>
+          <ion-label position="fixed">Customer</ion-label>
+          <b class="ml-2">{{ customerName }}</b>
+        </ion-item>
+        <ion-item>
+          <ion-label position="fixed">Product</ion-label>
+          <b class="ml-2">{{ ProductName }}</b>
+        </ion-item>
+      </ng-template>
+
+      <ion-item>
+        <ion-label position="fixed">Date</ion-label>
+        <ion-input
+          type="date"
+          #myDate
+          [value]="order.date | date: 'yyyy-MM-dd'"
+          required
+          (input)="dates = parseDate($event.target.value)"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="fixed">Jar Qty</ion-label>
+        <ion-input
+          type="number"
+          [value]="order.sold_quantity"
+          (input)="getJar($event)"
+          placeholder="Jar Qty"
+        ></ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            <ion-button
+              size="default"
+              color="primary"
+              (click)="onClickOfSubmit()"
+            >
+              Submit</ion-button
+            >
+            <ion-button
+              size="default"
+              color="danger"
+              class="ion-margin-horizontal"
+              (click)="onClickOfCancel()"
+              >Cancel</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</div>

@@ -1,0 +1,8 @@
+{
+  "name": "roApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

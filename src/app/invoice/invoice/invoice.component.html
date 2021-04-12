@@ -1,0 +1,140 @@
+<ion-header [translucent]="true" primary>
+  <ion-toolbar color="primary" class="background">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col class="col-9">
+        <div class="ion-text mt-3"><h5>Invoice</h5></div>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-end mt-1">
+          <ion-buttons slot="end">
+            <ion-icon
+              class="mt-2"
+              style="zoom: 1.7"
+              (click)="generatePDF()"
+              name="cloud-download"
+            ></ion-icon>
+          </ion-buttons>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" padding class="background">
+  <div class="form-group row">
+    <div class="col-6 mt-2">
+      <ion-item>
+        <ion-input
+          type="date"
+          #myDate
+          [value]="statement.from_date | date: 'yyyy-MM-dd'"
+          required
+          (input)="parseFromDate($event.target.value)"
+        ></ion-input>
+      </ion-item>
+    </div>
+    <div class="col-6 mt-2">
+      <ion-item>
+        <ion-input
+          type="date"
+          #myDate
+          [value]="statement.to_date | date: 'yyyy-MM-dd'"
+          required
+          (input)="parseToDate($event.target.value)"
+        ></ion-input>
+      </ion-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ion-item class="text-center">
+        <ion-label position="fixed">Customer</ion-label>
+        <ion-select
+          interface="popover"
+          (ionChange)="getValue($event)"
+          [value]="statement.customer_user_id"
+          placeholder="Select Customer"
+        >
+          <ion-select-option
+            *ngFor="let item of customers"
+            value="{{ item.user_id }}"
+            >{{ item.name }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </div>
+  </div>
+
+  <div class="row border">
+    <div class="col mt-1 text-center">
+      <h5><b class="text-muted">Invoice</b></h5>
+    </div>
+  </div>
+  <!--  -->
+  <div class="container" id="containToConvert" *ngIf="showStatement">
+    <div class="row" style="font-size: 0.8em">
+      <div class="col border ml-2">
+        <b> From, <br />{{ vendorDetails.name }}</b>
+        <br />
+        {{ vendorDetails.vendor.address_line1 }}
+        {{ vendorDetails.vendor.address_line2 }}
+        <br />
+        <b>Mob.</b> +91{{ vendorDetails.phone }}
+      </div>
+      <div class="col border ml-1">
+        <b> To, <br />{{ customerDetails.name }}</b>
+        <br />
+        {{ customerDetails.customer.address }}
+        <br />mob. +91{{ customerDetails.phone }}
+      </div>
+    </div>
+    <div class="col-lg-12 table-responsive mt-2" #TABLE #table>
+      <!-- <div style="padding-bottom: 10px; padding-top: 10px">
+			<div class="row">
+				<div class="col-sm-12">
+					<button (click)="ExportTOExcel()" class="btn btn-success">
+						ExportTOExcel
+					</button>
+				</div>
+			</div>
+		</div> -->
+
+      <table
+        id="printContentToPDF"
+        border="1"
+        width="100%"
+        class="table table-bordered text-center"
+        style="font-size: 0.8em"
+      >
+        <thead class="thead-light">
+          <tr>
+            <th>Sr</th>
+            <th>Prod.Name</th>
+            <th>Qty</th>
+            <th>Rate</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of bottleCardStatement; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ report.product.name }} {{ report.product.unit }}</td>
+            <td>{{ report.quantity }}</td>
+            <td>{{ report.rate }}</td>
+            <td>{{ report.product_price }}</td>
+          </tr>
+        </tbody>
+        <tr class="thead-light">
+          <td></td>
+          <td>Total</td>
+          <td>{{ totalJarQuantity }}</td>
+          <td>-</td>
+          <td>{{ totalProductPrice }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ion-content>

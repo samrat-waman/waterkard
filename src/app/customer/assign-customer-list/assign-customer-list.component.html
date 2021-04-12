@@ -1,0 +1,82 @@
+<ion-header [translucent]="true" primary mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons *ngIf="!showSearchbar" slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="!showSearchbar">Assigned Customers</ion-title>
+    <ion-searchbar
+      class="default-searchbar-margin"
+      mode="ios"
+      *ngIf="showSearchbar"
+      showCancelButton="always"
+      [(ngModel)]="searchedText"
+      (ionChange)="onChangeOfSearch()"
+      (ionCancel)="showSearchbar = false"
+      placeholder="Search"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <!-- <ion-button *ngIf="!showSearchbar" (click)="addGroup()">
+        <ion-icon
+          slot="icon-only"
+          name="add-outline"
+          style="zoom: 1.7"
+        ></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- <ion-card *ngFor="let group of groups" mode="ios">
+			<ion-card-header>
+				<ion-card-subtitle>
+					{{group.group_name}}
+					<ion-checkbox mode="md" color="light"></ion-checkbox>
+				</ion-card-subtitle>
+			</ion-card-header>
+			<ion-card-content>
+				<ion-grid fixed>
+					<ion-row>
+						<ion-col size="4">
+							<p>District</p>
+							<h6>Pune</h6>
+						</ion-col>
+						<ion-col size="4">
+							<p>Locality</p>
+							<h6>Pune</h6>
+						</ion-col>
+						<ion-col size="4">
+							<p>Pin Code</p>
+							<h6>Pune</h6>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</ion-card> -->
+    <ion-item *ngFor="let customer of customerDetails">
+      <ion-label>
+        <h2>
+          <ion-icon name="person" style="zoom: 1.2; color: crimson"> </ion-icon>
+          <b class="ml-1">{{ customer.name | titlecase }}</b>
+        </h2>
+        <span (click)="showMap()" class="float-right mr-2 mb-2">
+          <img
+            src="../../../assets/images/google-maps.png"
+            height="35"
+            width="35"
+          />
+        </span>
+
+        <a href="tel:+91-{{ customer.phone }}" class="button button-positive">
+          <ion-icon name="call" style="zoom: 1.2"> </ion-icon>
+        </a>
+
+        +91{{ customer.phone }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

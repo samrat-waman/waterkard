@@ -1,0 +1,236 @@
+<div
+	style="
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	"
+>
+	<ion-card>
+		<ion-grid>
+			<form #cardForm="ngForm" id="cardForm" name="cardForm">
+				<ion-row>
+					<ion-col>
+						<div class="ion-text-center">
+							<h3>
+								<b>
+									{{ customerName }}
+								</b>
+							</h3>
+
+							<div
+								*ngIf="
+									pendingPayment >= 0 && advancePayment <= 0;
+									then pendingBlock;
+									else elseAdvance
+								"
+							></div>
+							<ng-template #pendingBlock>
+								<p>
+									<b>
+										<ion-text color="primary">
+											Pending Payments ₹ {{ pendingPayment }}/-</ion-text
+										>
+									</b>
+								</p></ng-template
+							>
+
+							<ng-template #elseAdvance>
+								<p color="danger">
+									<b>
+										<ion-text color="success">
+											Advance Payments ₹ {{ advancePayment }}/-</ion-text
+										>
+									</b>
+								</p></ng-template
+							>
+						</div>
+					</ion-col>
+				</ion-row>
+
+				<div class="border-top"></div>
+				<ion-item>
+					<ion-label position="fixed"
+						>Date <ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-input
+						type="date"
+						#myDate
+						[value]="card.date | date: 'yyyy-MM-dd'"
+						required
+						(input)="dates = parseDate($event.target.value)"
+					></ion-input>
+					<!-- </ion-item> -->
+					<!-- <ion-item>
+					<ion-label position="fixed"
+						>Date <ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-input
+						type="date"
+						#myDate
+						[value]="card.date | date: 'yyyy-MM-dd'"
+						(input)="dates = parseDate($event.target.value)"
+						ngModel
+						name="date"
+						#date="ngModel"
+						required
+					>
+					</ion-input> -->
+
+					<!-- <div
+						*ngIf="
+							myDate.invalid && (date.dirty || date.touched || cardForm.submitted)
+						"
+						class="valid"
+					>
+						<div [hidden]="!date.errors.required">
+							<ion-text color="danger"> Date is required.</ion-text>
+						</div>
+					</div> -->
+				</ion-item>
+
+				<ion-item>
+					<ion-label position="fixed"
+						>Product <ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-select
+						interface="popover"
+						[value]="card.product_id"
+						(ionChange)="getValue($event)"
+						placeholder="Select Product"
+						ngModel
+						name="product"
+						#product="ngModel"
+						required
+					>
+						<ion-select-option
+							*ngFor="let item of customerProducts"
+							value="{{ item.product.product_id }}"
+							>{{ item.product.name }}
+							{{ item.product.unit }}</ion-select-option
+						>
+					</ion-select>
+					<div
+						*ngIf="
+							product.invalid &&
+							(product.dirty || product.touched || cardForm.submitted)
+						"
+						class="valid"
+					>
+						<div [hidden]="!product.errors.required">
+							<ion-text color="danger"> Product is required.</ion-text>
+						</div>
+					</div>
+				</ion-item>
+
+				<ion-item>
+					<ion-label position="fixed"
+						>Sold <ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-input
+						type="number"
+						[value]="card.sold_quantity"
+						(input)="getValue($event)"
+						name="sold"
+						ngModel
+						#sold="ngModel"
+						required
+						placeholder="Sold"
+					></ion-input>
+					<div
+						*ngIf="
+							sold.invalid && (sold.dirty || sold.touched || cardForm.submitted)
+						"
+						class="valid"
+					>
+						<div [hidden]="!sold.errors.required">
+							<ion-text color="danger"> Sold is required.</ion-text>
+						</div>
+					</div>
+				</ion-item>
+
+				<ion-item>
+					<ion-label position="fixed"
+						>Empty<ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-input
+						type="number"
+						[value]="card.empty_jar"
+						(input)="getValue($event)"
+						name="empty"
+						ngModel
+						#empty="ngModel"
+						required
+						placeholder="Empty"
+					></ion-input>
+					<div
+						*ngIf="card.empty_jar <= jar; then thenBlock; else elseBlock"
+					></div>
+					<ng-template #thenBlock></ng-template>
+					<ng-template #elseBlock
+						><ion-text color="danger"
+							>can't be greater than {{ jar }}.</ion-text
+						></ng-template
+					>
+					<div
+						*ngIf="
+							empty.invalid &&
+							(empty.dirty || empty.touched || cardForm.submitted)
+						"
+						class="valid"
+					>
+						<div [hidden]="!empty.errors.required">
+							<ion-text color="danger"> Empty is required.</ion-text>
+						</div>
+					</div>
+				</ion-item>
+
+				<ion-item>
+					<ion-label position="fixed">Balance</ion-label>
+					<ion-input
+						type="number"
+						[value]="card.balance_jar"
+						(input)="getValue($event)"
+						required
+						name="balance"
+						disabled
+						placeholder="Balance"
+					></ion-input>
+				</ion-item>
+
+				<ion-row>
+					<ion-col>
+						<div class="ion-text-center">
+							<ion-button
+								size="default"
+								color="primary"
+								(click)="onClickOfSubmit(cardForm)"
+							>
+								Submit</ion-button
+							>
+							<ion-button
+								size="default"
+								color="danger"
+								class="ion-margin-horizontal"
+								(click)="onClickOfCancel()"
+								>Cancel</ion-button
+							>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="ion-text-center">
+							<ion-button
+								expand="block"
+								(click)="onClickOfSubmitAddPayment(cardForm)"
+							>
+								Submit & Add Payment</ion-button
+							>
+						</div>
+					</ion-col>
+				</ion-row>
+			</form>
+		</ion-grid>
+	</ion-card>
+</div>

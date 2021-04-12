@@ -1,0 +1,203 @@
+<div
+	style="
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	"
+>
+	<ion-card>
+		<ion-list>
+			<ion-grid>
+				<form #driverForm="ngForm" id="driverForm" name="driverForm">
+					<ion-row>
+						<ion-col>
+							<div class="ion-text-center">
+								<h3>
+									<b>
+										{{ title }}
+									</b>
+								</h3>
+							</div>
+						</ion-col>
+					</ion-row>
+					<div class="border-top"></div>
+					<ion-item>
+						<ion-label position="fixed"
+							>Mobile <ion-text class="text-danger">*</ion-text></ion-label
+						>
+						<ion-input
+							ngModel
+							#phone="ngModel"
+							required
+							[pattern]="mobilePattern"
+							type="tel"
+							maxlength="10"
+							minlength="10"
+							[value]="driver.phone"
+							(input)="getValue($event)"
+							name="mobile"
+							placeholder="Whatsapp Number"
+							>+91</ion-input
+						>
+
+						<div
+							*ngIf="
+								phone.invalid &&
+								(phone.dirty || phone.touched || driverForm.submitted)
+							"
+							class="valid"
+						>
+							<div [hidden]="!phone.errors.required">
+								<ion-text color="danger"> Number is required.</ion-text>
+							</div>
+
+							<div *ngIf="phone.errors.pattern">
+								<ion-text color="danger"> 10 Digit</ion-text>
+							</div>
+						</div>
+					</ion-item>
+					<ion-item>
+						<ion-label position="fixed"
+							>Name <ion-text class="text-danger">*</ion-text></ion-label
+						>
+						<ion-input
+							type="text"
+							[value]="driver.name"
+							(input)="getValue($event)"
+							name="name"
+							placeholder="Name"
+							ngModel
+							#name="ngModel"
+							required
+						></ion-input>
+
+						<div
+							*ngIf="
+								name.invalid &&
+								(name.dirty || name.touched || driverForm.submitted)
+							"
+							class="valid"
+						>
+							<div [hidden]="!name.errors.required">
+								<ion-text color="danger"> Name is required.</ion-text>
+							</div>
+						</div>
+					</ion-item>
+					<ion-item>
+						<ion-label position="fixed"
+							>Address <ion-text class="text-danger">*</ion-text></ion-label
+						>
+						<ion-input
+							type="text"
+							[value]="driver.address"
+							(input)="getValue($event)"
+							name="address"
+							placeholder="Address"
+							ngModel
+							#address="ngModel"
+							required
+						></ion-input>
+
+						<div
+							*ngIf="
+								address.invalid &&
+								(address.dirty || address.touched || driverForm.submitted)
+							"
+							class="valid"
+						>
+							<div [hidden]="!name.errors.required">
+								<ion-text color="danger"> Adddress is required.</ion-text>
+							</div>
+						</div>
+					</ion-item>
+
+					<!-- <ion-item>
+						<ion-label position="fixed"
+							>Email <ion-text class="text-danger">*</ion-text></ion-label
+						>
+						<ion-input
+							type="email"
+							[pattern]="emailPattern"
+							[value]="driver.email"
+							(input)="getValue($event)"
+							name="email"
+							placeholder="Email"
+							ngModel
+							#email="ngModel"
+							required
+						></ion-input>
+
+						<div
+							*ngIf="
+								email.invalid &&
+								(email.dirty || email.touched || driverForm.submitted)
+							"
+							class="valid"
+						>
+							<div [hidden]="!email.errors.required">
+								<ion-text color="danger"> Email is required.</ion-text>
+							</div>
+							<div *ngIf="email.errors.pattern">
+								<ion-text color="danger"
+									>Please enter a valid email address</ion-text
+								>
+							</div>
+						</div>
+					</ion-item> -->
+
+					<!-- <ion-item *ngIf="show">
+						<ion-label position="fixed"
+							>Password <ion-text class="text-danger">*</ion-text></ion-label
+						>
+						<ion-input
+							ngModel
+							#pass="ngModel"
+							required
+							type="Password"
+							[value]="driver.password"
+							(input)="getValue($event)"
+							name="pass"
+							placeholder="Password"
+							minlength="4"
+							maxlength="10"
+						></ion-input>
+
+						<div
+							*ngIf="
+								pass.invalid &&
+								(pass.dirty || pass.touched || driverForm.submitted)
+							"
+							class="valid"
+						>
+							<div [hidden]="!pass.errors.required">
+								<ion-text color="danger"> Password is required.</ion-text>
+							</div>
+						</div>
+					</ion-item> -->
+
+					<ion-row>
+						<ion-col>
+							<div class="ion-text-center">
+								<ion-button
+									size="default"
+									color="primary"
+									(click)="onClickOfSubmit(driverForm)"
+								>
+									{{ buttonName }}</ion-button
+								>
+								<ion-button
+									size="default"
+									color="danger"
+									class="ion-margin-horizontal"
+									(click)="onClickOfCancel()"
+									>Cancel</ion-button
+								>
+							</div>
+						</ion-col>
+					</ion-row>
+				</form>
+			</ion-grid>
+		</ion-list>
+	</ion-card>
+</div>

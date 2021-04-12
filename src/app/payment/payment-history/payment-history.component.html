@@ -1,0 +1,72 @@
+<ion-header [translucent]="true" primary>
+	<ion-toolbar color="primary">
+		<ion-buttons *ngIf="!showSearchbar" slot="start">
+			<ion-menu-button color="light"></ion-menu-button>
+		</ion-buttons>
+		<ion-row>
+			<ion-col *ngIf="!showSearchbar" class="col-9">
+				<div class="ion-text mt-3"><h5>Payments</h5></div>
+			</ion-col>
+			<ion-col>
+				<div class="ion-text-end mt-1">
+					<ion-searchbar
+						*ngIf="showSearchbar"
+						showCancelButton="always"
+						[(ngModel)]="searchedText"
+						(ionChange)="onChangeOfSearch()"
+						(ionCancel)="showSearchbar = false"
+						placeholder="Search"
+					></ion-searchbar>
+					<ion-buttons slot="end">
+						<ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+							<ion-icon slot="icon-only" name="search"></ion-icon>
+						</ion-button>
+					</ion-buttons>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<table class="table">
+		<thead class="thead-light">
+			<tr class="text-center">
+				<th>Date</th>
+				<th>Paid Amount</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let paymentHistory of paymentHistory" class="text-center">
+				<td>{{ paymentHistory.date }}</td>
+				<td><b> ₹</b> {{ paymentHistory.payment_amount }} /-</td>
+				<td>
+					<div class="ion-text-end">
+						<ion-icon
+							(click)="
+								editPaymentHistory(
+									paymentHistory.bottle_card_payment_id,
+									paymentHistory.date,
+									paymentHistory.payment_amount
+								)
+							"
+							class="mr-1"
+							name="create-outline"
+							color="primary"
+							style="zoom: 1.7"
+						></ion-icon>
+
+						<ion-icon
+							(click)="
+								deletePaymentHistory(paymentHistory.bottle_card_payment_id)
+							"
+							name="trash-outline"
+							color="danger"
+							style="zoom: 1.7"
+						></ion-icon>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</ion-content>

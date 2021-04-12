@@ -1,0 +1,92 @@
+<ion-header [translucent]="true" primary mode="md">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="!showSearchbar"
+      >{{groupData ? 'Update' : 'New'}} Customer Group</ion-title
+    >
+    <ion-searchbar
+      class="default-searchbar-margin"
+      mode="ios"
+      *ngIf="showSearchbar"
+      showCancelButton="always"
+      [(ngModel)]="searchedText"
+      (ionChange)="onChangeOfSearch()"
+      (ionCancel)="showSearchbar = false"
+      placeholder="Search"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Group Name *</ion-card-subtitle>
+      <ion-input [(ngModel)]="group_name" type="text"></ion-input>
+      <ion-card-subtitle>Group Description *</ion-card-subtitle>
+      <ion-textarea [(ngModel)]="description"></ion-textarea>
+      <ion-card-subtitle>Select Driver *</ion-card-subtitle>
+      <ion-select
+        *ngIf="drivers.length"
+        interface="popover"
+        [(ngModel)]="driver_user_id"
+        placeholder="Select Driver"
+      >
+        <ion-select-option *ngFor="let item of drivers" [value]="item.user_id "
+          >{{ item.name }}</ion-select-option
+        >
+      </ion-select>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header> </ion-list-header>
+        <div *ngFor="let customer of customers" mode="ios">
+          <ion-card-header>
+            <ion-card-subtitle>
+              {{customer.name}}
+              <ion-checkbox
+                [hidden]="isDriver"
+                (ionChange)="customerToggled($event, customer)"
+                [checked]="groupCustomers.includes(customer.user_id)"
+                mode="md"
+                color="light"
+              ></ion-checkbox>
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size="4">
+                  <p>District</p>
+                  <h6>{{customer.customer.address}}</h6>
+                </ion-col>
+                <ion-col size="4">
+                  <p>Locality</p>
+                  <h6>{{customer.customer.city}}</h6>
+                </ion-col>
+                <ion-col size="4">
+                  <p>Pin Code</p>
+                  <h6>{{customer.customer.pincode}}</h6>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="ion-padding-left ion-padding-right">
+    <ion-button
+      [disabled]="!(group_name && description)"
+      (click)="createOrUpdateGroup()"
+      expand="full"
+    >
+      {{groupData ? 'Update Group' : 'Create Group'}}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

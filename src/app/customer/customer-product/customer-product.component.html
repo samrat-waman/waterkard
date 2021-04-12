@@ -1,0 +1,167 @@
+<ion-card>
+	<ion-list>
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-center">
+						<h3>
+							<b>
+								{{ customerName }}
+							</b>
+						</h3>
+						<ion-text>Add New Product</ion-text>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-item>
+				<ion-label position="fixed"
+					>Product {{ customer_product.product_id }}</ion-label
+				>
+				<ion-select
+					interface="popover"
+					[value]="customer_product.product_id"
+					(ionChange)="getValue($event)"
+					placeholder="Select Product"
+				>
+					<ion-select-option
+						class="text-wrap"
+						*ngFor="let item of products"
+						[value]="item.product_id"
+					>
+						<!-- {{}} -->
+						{{ item.name }} {{ item.unit }}
+					</ion-select-option>
+					>
+				</ion-select>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="fixed">Rate</ion-label>
+				<ion-input
+					type="number"
+					[value]="customer_product.rate"
+					(input)="getValue($event)"
+					name="rate"
+					placeholder="Per Bottle Rate"
+				></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="fixed">Balance Jar</ion-label>
+				<ion-input
+					type="number"
+					[value]="customer_product.balance_jar"
+					(input)="getValue($event)"
+					name="jar"
+					placeholder="Existing balance of bottles"
+				></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="fixed">Dispensers</ion-label>
+				<ion-input
+					type="number"
+					[value]="customer_product.dispensers"
+					(input)="getValue($event)"
+					name="dispensers"
+					placeholder="Dispensers"
+				></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="fixed">Deposit</ion-label>
+				<ion-input
+					type="number"
+					[value]="customer_product.deposit"
+					(input)="getValue($event)"
+					name="deposit"
+					placeholder="Deposit"
+				></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="fixed">Default</ion-label>
+				<ion-radio-group
+					value="0"
+					name="radio-group"
+					(ionChange)="radioGroupChange($event)"
+					#radioGroup
+				>
+					<ion-item>
+						<ion-label>Yes</ion-label>
+						<ion-radio slot="start" value="1"></ion-radio>
+					</ion-item>
+
+					<ion-item>
+						<ion-label>No</ion-label>
+						<ion-radio slot="start" value="0"></ion-radio>
+					</ion-item>
+				</ion-radio-group>
+			</ion-item>
+			<p class="ion-text-center">
+				<ion-text color="danger"> Balance can't changed once Updated</ion-text>
+			</p>
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-center">
+						<ion-button
+							size="default"
+							color="primary"
+							(click)="onClickOfSubmit()"
+						>
+							Add Product</ion-button
+						>
+						<ion-button
+							size="default"
+							color="danger"
+							class="ion-margin-horizontal"
+							(click)="onClickOfCancel()"
+							>Close</ion-button
+						>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<br />
+		<div class="ion-text-center">
+			<ion-text>My Products</ion-text>
+			<!--  -->
+			<ion-card *ngFor="let item of customerDetail">
+				<ion-card-header>
+					<ion-row>
+						<ion-col class="col-9">
+							<ion-text color="dark">
+								<b> {{ item.product.name }} {{ item.product.unit }} </b>
+							</ion-text>
+						</ion-col>
+						<ion-col>
+							<ion-text color="dark">
+								<div class="ion-text-end">
+									<b> ₹ {{ item.rate }}/- </b>
+								</div>
+							</ion-text>
+						</ion-col>
+					</ion-row>
+
+					<!-- <ion-row >
+          <ion-col >
+            <div class="ion-text-center ion-padding-top" >
+              <ion-icon name="create-outline" color="primary" style="zoom:1.7;"></ion-icon> <ion-text color="primary">Edit</ion-text>
+            </div>
+          </ion-col>
+          <ion-col >
+            <div class="ion-text-center ion-padding-top"> 
+              <ion-icon name="trash-outline" color="danger" style="zoom:1.7;"></ion-icon>
+              <ion-text color="danger">
+                
+                Delete   
+              </ion-text>
+            </div>
+            </ion-col>
+        </ion-row> -->
+				</ion-card-header>
+				<ion-card-content> </ion-card-content>
+			</ion-card>
+		</div>
+	</ion-list>
+</ion-card>

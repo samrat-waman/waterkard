@@ -1,0 +1,106 @@
+<ion-header [translucent]="true" primary>
+	<ion-toolbar color="primary">
+		<ion-buttons *ngIf="!showSearchbar" slot="start">
+			<ion-menu-button color="light"></ion-menu-button>
+		</ion-buttons>
+		<ion-row>
+			<ion-col class="col-8" *ngIf="!showSearchbar">
+				<div class="ion-text mt-3">
+					<h5>Drivers</h5>
+				</div>
+			</ion-col>
+			<ion-col>
+				<div class="ion-text-end mt-2 mr-2">
+					<!--  -->
+					<ion-searchbar
+						*ngIf="showSearchbar"
+						showCancelButton="always"
+						[(ngModel)]="searchedText"
+						(ionChange)="onChangeOfSearch()"
+						(ionCancel)="showSearchbar = false"
+						placeholder="Search"
+					></ion-searchbar>
+					<ion-buttons slot="end">
+						<ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+							<ion-icon slot="icon-only" name="search"></ion-icon>
+						</ion-button>
+						<!--  -->
+						<ion-icon
+							*ngIf="!showSearchbar"
+							name="add-outline"
+							style="zoom: 1.7"
+							(click)="addDriver()"
+						></ion-icon>
+					</ion-buttons>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" padding class="background">
+	<ion-header translucent>
+		<ion-toolbar>
+			<ion-card *ngFor="let item of drivers">
+				<ion-card-header style="padding: 10px">
+					<ion-row>
+						<ion-col>
+							<ion-text color="dark">
+								<b>
+									{{ item.name }}
+								</b>
+							</ion-text>
+						</ion-col>
+						<ion-col>
+							<ion-text color="dark">
+								<div class="ion-text-end">
+									<a
+										href="tel:+91-{{ item.phone }}"
+										class="button button-positive"
+									>
+										<ion-icon name="call" style="zoom: 1.2"> </ion-icon>
+									</a>
+									+91{{ item.phone }}
+								</div>
+							</ion-text>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							{{ item.address[0].area }}
+						</ion-col>
+
+						<ion-col>
+							<div class="ion-text-end">
+								Password :
+								{{ item.password_text }}
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col (click)="onClickOfEdit(item.user_id)">
+							<div class="ion-text-center" style="padding-top: 5px">
+								<ion-icon
+									name="create-outline"
+									color="primary"
+									style="zoom: 1"
+								></ion-icon>
+								<ion-text color="primary">Edit</ion-text>
+							</div>
+						</ion-col>
+						<ion-col (click)="onClickOfDelete(item.user_id)">
+							<div class="ion-text-center" style="padding-top: 5px">
+								<ion-icon
+									name="trash-outline"
+									color="danger"
+									style="zoom: 1"
+								></ion-icon>
+								<ion-text color="danger"> Delete </ion-text>
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-card-header>
+			</ion-card>
+		</ion-toolbar>
+	</ion-header>
+</ion-content>

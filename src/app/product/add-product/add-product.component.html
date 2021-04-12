@@ -1,0 +1,159 @@
+<div
+	style="
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	"
+>
+	<ion-card>
+		<ion-grid>
+			<form #productForm="ngForm" id="productForm" name="productForm">
+				<ion-row>
+					<ion-col>
+						<div class="ion-text-center">
+							<h3>
+								<b>
+									{{ title }}
+								</b>
+							</h3>
+						</div>
+					</ion-col>
+				</ion-row>
+				<div class="border-top"></div>
+				<ion-item>
+					<ion-label position="fixed"
+						>Unit <ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-select
+						interface="popover"
+						value="{{ product.unit }}"
+						[value]="product.unit"
+						(ionChange)="getValue($event)"
+						placeholder="Select Unit"
+						ngModel
+						#unit="ngModel"
+						name="unit"
+						required
+					>
+						<ion-select-option value="20-liter capsule jar"
+							>20-liter capsule jar</ion-select-option
+						>
+						<ion-select-option value="18-liter cool Jar">
+							18-liter cool Jar</ion-select-option
+						>
+					</ion-select>
+					<div
+						*ngIf="
+							unit.invalid &&
+							(unit.dirty || unit.touched || productForm.submitted)
+						"
+						class="valid"
+					>
+						<div [hidden]="!unit.errors.required">
+							<ion-text color="danger"> Unit is required.</ion-text>
+						</div>
+					</div>
+				</ion-item>
+
+				<ion-item>
+					<ion-label position="fixed"
+						>Name <ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-input
+						type="text"
+						[value]="product.name"
+						(input)="getValue($event)"
+						name="name"
+						placeholder="Product Name"
+						ngModel
+						#name="ngModel"
+						required
+					></ion-input>
+					<div
+						*ngIf="
+							name.invalid &&
+							(name.dirty || name.touched || productForm.submitted)
+						"
+						class="valid"
+					>
+						<div [hidden]="!name.errors.required">
+							<ion-text color="danger"> Name is required.</ion-text>
+						</div>
+					</div>
+				</ion-item>
+
+				<ion-item>
+					<ion-label position="fixed"
+						>Rate <ion-text class="text-danger">*</ion-text></ion-label
+					>
+					<ion-input
+						type="number"
+						[value]="product.price"
+						(input)="getValue($event)"
+						name="price"
+						placeholder="Product Default Rate"
+						ngModel
+						#rate="ngModel"
+						required
+					></ion-input>
+					<div
+						*ngIf="
+							rate.invalid &&
+							(rate.dirty || rate.touched || productForm.submitted)
+						"
+						class="valid"
+					>
+						<div [hidden]="!rate.errors.required">
+							<ion-text color="danger"> Rate is required.</ion-text>
+						</div>
+					</div>
+				</ion-item>
+				<ion-item>
+					<ion-item>
+						<ion-label position="fixed"
+							>Default <ion-text class="text-danger">*</ion-text></ion-label
+						>
+						<ion-radio-group
+							value="{{ product.is_default }}"
+							name="radio-group"
+							(ionChange)="radioGroupChange($event)"
+							#radioGroup
+						>
+							<ion-item>
+								<ion-label>Yes</ion-label>
+								<ion-radio slot="start" value="1"></ion-radio>
+							</ion-item>
+
+							<ion-item>
+								<ion-label>No</ion-label>
+								<ion-radio slot="start" value="0"></ion-radio>
+							</ion-item>
+						</ion-radio-group>
+					</ion-item>
+				</ion-item>
+
+				<ion-row>
+					<ion-col>
+						<div class="ion-text-center">
+							<ion-button
+								size="default"
+								color="primary"
+								(click)="onClickOfSubmit(productForm)"
+							>
+								{{ buttonName }}</ion-button
+							>
+							<ion-button
+								size="default"
+								color="danger"
+								class="ion-margin-horizontal"
+								(click)="onClickOfCancel()"
+								>Cancel</ion-button
+							>
+						</div>
+					</ion-col>
+				</ion-row>
+			</form>
+		</ion-grid>
+	</ion-card>
+</div>

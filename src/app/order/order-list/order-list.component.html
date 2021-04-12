@@ -1,0 +1,201 @@
+<ion-header [translucent]="true" primary>
+	<ion-toolbar color="primary">
+		<ion-buttons *ngIf="!showSearchbar" slot="start">
+			<ion-menu-button color="light"></ion-menu-button>
+		</ion-buttons>
+
+		<ion-row>
+			<ion-col *ngIf="!showSearchbar" class="col-6">
+				<div class="ion-text mt-3"><h5>Orders</h5></div>
+			</ion-col>
+			<ion-col>
+				<div class="ion-text-end mt-1">
+					<ion-searchbar
+						*ngIf="showSearchbar"
+						showCancelButton="always"
+						[(ngModel)]="searchedText"
+						(ionChange)="onChangeOfSearch()"
+						(ionCancel)="showSearchbar = false"
+						placeholder="Search"
+					></ion-searchbar>
+					<ion-buttons slot="end">
+						<ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+							<ion-icon slot="icon-only" name="search"></ion-icon>
+						</ion-button>
+
+						<ion-icon
+							*ngIf="!showSearchbar"
+							name="add-outline"
+							style="zoom: 1.7"
+							(click)="addOrder()"
+						></ion-icon>
+
+						<!-- <ion-buttons slot="end"> -->
+						<ion-button *ngIf="!showSearchbar" (click)="presentPopover($event)">
+							<ion-icon
+								slot="icon-only"
+								ios="ellipsis-horizontal"
+								md="ellipsis-vertical"
+							></ion-icon>
+						</ion-button>
+						<!-- </ion-buttons> -->
+
+						<!-- <ion-label>Gaming</ion-label> -->
+						<!-- *ngIf="!showSearchbar" -->
+						<!-- <ion-item>
+							<ion-icon name="ellipsis-vertical"> </ion-icon>
+							<ion-select interface="popover">
+								<ion-select-option value="nes">NES</ion-select-option>
+								<ion-select-option value="n64">Nintendo64</ion-select-option>
+								<ion-select-option value="ps">PlayStation</ion-select-option>
+								<ion-select-option value="genesis"
+									>Sega Genesis</ion-select-option
+								>
+								<ion-select-option value="saturn"
+									>Sega Saturn</ion-select-option
+								>
+								<ion-select-option value="snes">SNES</ion-select-option>
+							</ion-select>
+						</ion-item> -->
+
+						<!-- <ion-icon
+							*ngIf="!showSearchbar"
+							name="ellipsis-vertical"
+							style="zoom: 2"
+						>
+						</ion-icon> -->
+
+						<!-- <ion-select
+							(ionChange)="onChangeOfOrder($event)"
+							interface="popover"
+							*ngIf="!showSearchbar"
+						>
+							<ion-select-option value="today_orders"
+								>Today's Orders</ion-select-option
+							>
+							<ion-select-option value="upcoming_orders"
+								>Upcoming Orders</ion-select-option
+							>
+							<ion-select-option value="previous_orders"
+								>Previous Orders</ion-select-option
+							>
+						</ion-select> -->
+					</ion-buttons>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<!-- <ion-content fullscreen="true" padding class="background" > 
+  <ion-header translucent>
+   
+    <ion-toolbar >
+   
+      <ion-card> -->
+<ion-content fullscreen="true" padding class="background">
+	<!-- <ion-grid class="ion-text-center">
+		<ion-row class="header-row" color="primary">
+			<ion-col>
+				<p class="ellipsis">Date</p>
+			</ion-col>
+
+			<ion-col>
+				<p class="ellipsis">Product</p>
+			</ion-col>
+
+			<ion-col>
+				<p class="ellipsis">Name</p>
+			</ion-col>
+
+			<ion-col>
+				<p class="ellipsis">Jar-Qty</p>
+			</ion-col>
+			<ion-col>
+				<p class="ellipsis">Action</p>
+			</ion-col>
+		</ion-row>
+
+		<ion-row *ngFor="let item of orders">
+			<ion-col clas
+				<p class="ellipsis">
+					{{ item.date || "M/d/yy" }}
+				</p>
+			</ion-col>
+
+			<ion-col>
+				<p class="ellipsis">
+					{{ item.product.name }}
+				</p>
+			</ion-col>
+
+			<ion-col>
+				<p class="ellipsis">
+					{{ item.customer.name }}
+				</p>
+			</ion-col>
+
+			<ion-col>
+				<p class="ellipsis">
+					{{ item.sold_quantity }}
+				</p>
+			</ion-col>
+
+			<ion-col (click)="onClickOfEdit()">
+				<p class="ellipsis">
+					<ion-icon
+						name="create-outline"
+						color="primary"
+						style="zoom: 1"
+					></ion-icon>
+					<ion-text color="primary">Edit</ion-text>
+				</p>
+			</ion-col>
+		</ion-row>
+	</ion-grid> -->
+
+	<table class="table">
+		<thead class="thead-light">
+			<tr class="text-center">
+				<th>Date</th>
+				<th>Product</th>
+				<th>Name</th>
+				<th>Jar</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody class="tb">
+			<tr *ngFor="let order of orders" class="text-center">
+				<td (click)="onClickViewOrder(order.bottle_card_id)">
+					{{ order.date || "M/d/yy" }}
+				</td>
+				<td (click)="onClickViewOrder(order.bottle_card_id)">
+					{{ order.product.unit }}
+				</td>
+				<td (click)="onClickViewOrder(order.bottle_card_id)">
+					{{ order.customer.name }}
+				</td>
+				<td (click)="onClickViewOrder(order.bottle_card_id)">
+					{{ order.sold_quantity }}
+				</td>
+				<td>
+					<ion-col (click)="onClickOfEdit(order.bottle_card_id)">
+						<ion-icon
+							name="create-outline"
+							color="primary"
+							style="zoom: 1.8"
+						></ion-icon>
+					</ion-col>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</ion-content>
+<!-- 
+ </ion-card>
+ 
+    </ion-toolbar>
+  </ion-header>
+  
+
+ -->

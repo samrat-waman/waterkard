@@ -1,0 +1,20 @@
+agm-map {
+  height: 100vh;
+  width: 100vw;
+}
+
+#target {
+  position: fixed;
+  left: calc(50% - 5px);
+  top: calc(50% - 5px);
+  width: 10px;
+  background-color: #000;
+  border-radius: 5px;
+  z-index: 100000;
+  height: 10px;
+}
+
+ion-toolbar {
+  --background: transparent;
+  --border-width: 0px !important;
+}

@@ -1,0 +1,52 @@
+<div
+	style="
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	"
+>
+	<ion-card>
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-center">
+						<h3><b> Select Type Of Order </b></h3>
+					</div>
+				</ion-col>
+			</ion-row>
+			<div class="border-top"></div>
+
+			<ion-card (click)="onClickCustomerOrder()">
+				<ion-item>
+					<div class="col text-center">
+						<h5>Add Customer Order</h5>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-card (click)="onClickOfEvent()">
+				<ion-item>
+					<div class="col text-center">
+						<h5>Add Event Order</h5>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-center">
+						<ion-button
+							size="default"
+							color="danger"
+							class="ion-margin-horizontal"
+							#cancelButton
+							(click)="onClickOfCancel()"
+							>Cancel</ion-button
+						>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+</div>

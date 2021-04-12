@@ -1,0 +1,17 @@
+ion-card {
+	max-height: 100%;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+}
+ion-list {
+	overflow: hidden;
+	overflow-y: auto;
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+ion-select-option {
+	-ms-text-size-adjust: auto;
+}

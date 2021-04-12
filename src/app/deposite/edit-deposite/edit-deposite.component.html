@@ -1,0 +1,69 @@
+<div
+	style="
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	"
+>
+	<ion-card>
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-center">
+						<h3><b> Update Diposit </b></h3>
+					</div>
+				</ion-col>
+			</ion-row>
+			<div class="border-top"></div>
+
+			<ion-item>
+				<ion-label position="fixed">Product</ion-label>
+				<ion-select
+					interface="popover"
+					[(ngModel)]="customerDeposit.product_id"
+					placeholder="Select Product"
+				>
+					<ion-select-option
+						class="text-wrap"
+						*ngFor="let item of products"
+						[value]="item.product_id"
+					>
+						{{ item.product.name }} {{ item.product.unit }}
+					</ion-select-option>
+					>
+				</ion-select>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="fixed">Amount</ion-label>
+				<ion-input
+					type="number"
+					[(ngModel)]="customerDeposit.deposit"
+					placeholder="Product Default Rate"
+				></ion-input>
+			</ion-item>
+
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-center">
+						<ion-button
+							size="default"
+							color="primary"
+							(click)="onClickOfSubmit()"
+						>
+							update</ion-button
+						>
+						<ion-button
+							size="default"
+							color="danger"
+							class="ion-margin-horizontal"
+							(click)="onClickOfCancel()"
+							>Cancel</ion-button
+						>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+</div>

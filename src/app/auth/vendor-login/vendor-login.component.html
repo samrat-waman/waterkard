@@ -1,0 +1,90 @@
+<ion-content padding>
+	<div
+		style="
+			height: 100%;
+			color: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		"
+		class="imag"
+	>
+		<ion-text align="center">
+			<h1
+				style="
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				"
+			>
+				<ion-avatar style="height: 110px; width: 110px">
+					<img src="../../../assets/images/logo.jpg" />
+				</ion-avatar>
+			</h1>
+			<h1>WaterKard</h1>
+			<h1>
+				<ion-card class="ion-padding md">
+					<form>
+						<div text-center>
+							<h3>Login</h3>
+							<div class="border-top"></div>
+						</div>
+						<div padding>
+							<ion-item>
+								<ion-icon name="person" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									[value]="login.username"
+									(input)="do_something($event)"
+									name="user"
+									type="text"
+									placeholder="Mobile Number/Email"
+									required
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-icon name="lock-closed" color="primary"></ion-icon>
+								<ion-input
+									class="ion-margin-horizontal native-input sc-ion-input-md"
+									[value]="login.password"
+									(input)="do_something($event)"
+									name="password"
+									type="password"
+									placeholder="Password"
+									required
+								></ion-input>
+							</ion-item>
+						</div>
+						<div padding>
+							<ion-button
+								class="ion-margin-top md"
+								size="medium"
+								type="submit"
+								routerDirection="forward"
+								(click)="onClickOfLogin()"
+								>Login</ion-button
+							>
+						</div>
+						<!-- <p class="size-10"><a>Forgot Password ?</a></p> -->
+						<p style="font-size: 12pt; font-family: Verdana, sans-serif">
+							To learn more about WaterKard call
+							<a type="tel"> +918888888888</a>
+						</p>
+					</form>
+				</ion-card>
+			</h1>
+		</ion-text>
+
+		<!-- <ion-card>
+Vendor Login
+</ion-card>
+<ion-card>
+Driver Login
+</ion-card>
+
+<ion-card>
+  Create Account
+</ion-card> -->
+	</div>
+</ion-content>

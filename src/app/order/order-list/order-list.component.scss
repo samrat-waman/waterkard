@@ -1,0 +1,29 @@
+.header-row {
+	background: #e0e0e0;
+	color: black;
+	font-size: 18px;
+	position: relative;
+}
+
+.tb {
+	word-wrap: break-word !important;
+}
+td {
+	width: auto;
+	text-align: center;
+	font-weight: bold;
+	font-size: 13px;
+	color: black;
+	border: 1px;
+}
+
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+p.block {
+	width: 8px;
+	font-size: 14px;
+}
