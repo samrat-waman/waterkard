@@ -107,7 +107,6 @@ export class AssignCustomerListComponent implements OnInit {
   }
 
   getCustomerGroups(term = '') {
-
     this.httpService.posts('', 'customer-group/list').subscribe((res: any) => {
       this.customerGropId = res.data.info.data[0].customer_group_id;
       this.httpService
@@ -133,11 +132,9 @@ export class AssignCustomerListComponent implements OnInit {
 
 
   }
-
   onChangeOfSearch() {
     this.getCustomerGroups(this.searchedText);
   }
-
   async showGroup(notification?) {
     const modal = await this.modalController.create({
       component: SingleCustomerGroupPage,
@@ -145,8 +142,4 @@ export class AssignCustomerListComponent implements OnInit {
     });
     await modal.present();
   }
-
-
-
-
 }

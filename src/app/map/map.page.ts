@@ -13,8 +13,8 @@ const { Geolocation } = Plugins;
 })
 export class MapPage implements OnInit {
 
-  lat = 13.5;
-  lng = 50.55667;
+  lat = 19.1256597;
+  lng = 73.9894382;
   hasPermission: boolean;
 
   @ViewChild('map') mapView: ElementRef;
@@ -27,72 +27,72 @@ export class MapPage implements OnInit {
     // throw new Error('Method not implemented.');
   }
 
-async ionViewDidEnter() {
+  async ionViewDidEnter() {
     Geolocation.requestPermissions()
-    .then(res => {
-      console.log(res.results);
-      this.hasPermission = true;
-      this.getCurrentPosition();
-    }, err => {
-      this.showAlert('You need to enable locations permissions');
+      .then(res => {
+        console.log('in map component: ', res.results);
+        this.hasPermission = true;
+        this.getCurrentPosition();
+      }, err => {
+        this.showAlert('You need to enable locations permissions');
+      });
+  }
+
+  async showAlert(message) {
+    const alert = await this.alertController.create({
+      message,
+      buttons: ['OK']
     });
-}
 
-async showAlert(message) {
-  const alert = await this.alertController.create({
-    message,
-    buttons: ['OK']
-  });
+    await alert.present();
+  }
 
-  await alert.present();
-}
+  mapClicked(evt) {
+    console.log(evt);
 
-mapClicked(evt) {
-  console.log(evt);
-  
-}
+  }
 
-centerChanged(evt) {
-  // this.lat = evt.lat;
-  // this.lng = evt.lng;
-  this.centerData = evt;
-}
+  centerChanged(evt) {
+    // this.lat = evt.lat;
+    // this.lng = evt.lng;
+    this.centerData = evt;
+  }
 
-mapZoomed(evt) {
-  console.log('Zoomed', evt);
-  
-}
+  mapZoomed(evt) {
+    console.log('Zoomed', evt);
 
-mapDragStart() {
-  console.log('Drag started');
-  this.showTarget = true;
-}
+  }
 
-mapDragEnded() {
-  console.log(this.centerData);
-  this.lat = this.centerData?.lat;
-  this.lng = this.centerData?.lng;
-  this.showTarget = false;
-}
+  mapDragStart() {
+    console.log('Drag started');
+    this.showTarget = true;
+  }
 
-markerDropped(evt) {
-  console.log(evt);
-  this.lat = evt.latLng.lat();
-  this.lng = evt.latLng.lng();
-}
+  mapDragEnded() {
+    console.log(this.centerData);
+    this.lat = this.centerData?.lat;
+    this.lng = this.centerData?.lng;
+    this.showTarget = false;
+  }
 
-selectLocation() {
-  this.modalController.dismiss({coords: [this.lat, this.lng]});
-}
+  markerDropped(evt) {
+    console.log(evt);
+    this.lat = evt.latLng.lat();
+    this.lng = evt.latLng.lng();
+  }
 
-ionViewDidLeave() {
+  selectLocation() {
+    this.modalController.dismiss({ coords: [this.lat, this.lng] });
+  }
+
+  ionViewDidLeave() {
     // CapacitorGoogleMaps.close();
-}
+  }
 
-async getCurrentPosition() {
-  const coordinates = await Geolocation.getCurrentPosition();
-  this.lat = coordinates.coords.latitude;
-  this.lng = coordinates.coords.longitude;
-}
+  async getCurrentPosition() {
+    const coordinates = await Geolocation.getCurrentPosition();
+    this.lat = coordinates.coords.latitude;
+    this.lng = coordinates.coords.longitude;
+  }
 
 }

@@ -1,13 +1,34 @@
 <ion-content fullscreen class="ion-no-padding">
   <!-- <div id="map" #map></div> -->
-  <agm-map (touchstart)="mapDragStart()" [mapDraggable]="true" (zoomChange)="mapZoomed($event)" (touchend)="mapDragEnded()" (centerChange)="centerChanged($event)" (mapClick)="mapClicked($event)" [latitude]="lat" [longitude]="lng" [zoom]="15" [disableDefaultUI]="false">
-    <agm-marker (dragEnd)="markerDropped($event)" [latitude]="lat" [longitude]="lng" [markerDraggable]='true'></agm-marker>
+  <agm-map
+    (touchstart)="mapDragStart()"
+    [mapDraggable]="true"
+    (zoomChange)="mapZoomed($event)"
+    (touchend)="mapDragEnded()"
+    (centerChange)="centerChanged($event)"
+    (mapClick)="mapClicked($event)"
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="15"
+    [disableDefaultUI]="false"
+  >
+    <agm-marker
+      (dragEnd)="markerDropped($event)"
+      [latitude]="lat"
+      [longitude]="lng"
+      [markerDraggable]="true"
+    ></agm-marker>
   </agm-map>
   <div *ngIf="showTarget" id="target"></div>
 </ion-content>
 <ion-footer class="ion-padding">
   <ion-toolbar>
-    <ion-button (click)="selectLocation()" color="" expand="block" shape="round">
+    <ion-button
+      (click)="selectLocation()"
+      color=""
+      expand="block"
+      shape="round"
+    >
       Select Location
     </ion-button>
   </ion-toolbar>
