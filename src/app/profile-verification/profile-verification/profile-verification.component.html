@@ -34,7 +34,7 @@
         <th>Name</th>
         <th>Id_Proof</th>
         <th>Add_Proof</th>
-        <th>Action</th>
+        <th>Status</th>
       </tr>
     </thead>
 
@@ -64,9 +64,7 @@
             width="35"
           />
         </td>
-        <td>
-          <img src="../../../assets/images/check.png" height="20" width="20" />
-        </td>
+        <td (click)="updateStatus(item.user_id, item.name)">Verified</td>
       </tr>
     </tbody>
   </table>

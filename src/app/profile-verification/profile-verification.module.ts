@@ -5,10 +5,11 @@ import { ProfileVerificationRoutingModule } from './profile-verification-routing
 import { ProfileVerificationComponent } from './profile-verification/profile-verification.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { VerificationStatusComponent } from './verification-status/verification-status.component';
 
 
 @NgModule({
-  declarations: [ProfileVerificationComponent],
+  declarations: [ProfileVerificationComponent, VerificationStatusComponent],
   imports: [
     CommonModule,
     IonicModule,
