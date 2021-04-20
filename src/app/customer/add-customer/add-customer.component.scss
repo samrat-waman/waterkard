@@ -1,13 +1,17 @@
 ion-card {
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    border-radius : 10px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+ion-list {
+  overflow: hidden;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
   }
-  ion-list {
-    overflow: hidden;
-    overflow-y: auto;
-    ::-webkit-scrollbar {
-      display: none;
-    }
-  }
+}
+ion-toggle {
+  --handle-background-checked: #fff url(/assets/power-icon.png) no-repeat center /
+    contain;
+}

@@ -1,383 +1,424 @@
 <ion-card>
-	<ion-list>
-		<ion-grid>
-			<form #customerForm="ngForm" id="customerForm" name="customerForm">
-				<ion-row>
-					<ion-col>
-						<div class="ion-text-center">
-							<h3>
-								<b>
-									{{ title }}
-								</b>
-							</h3>
-						</div>
-					</ion-col>
-				</ion-row>
-				<div class="border-top"></div>
-				<ion-item>
-					<ion-label position="fixed"
-						>Type of <br />Customer
-						<ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-radio-group
-						value="regular"
-						name="radio-group"
-						(ionChange)="radioGroupChange($event)"
-						#radioGroup
-					>
-						<ion-item>
-							<ion-label>Normal</ion-label>
-							<ion-radio slot="start" value="regular"></ion-radio>
-						</ion-item>
+  <ion-list>
+    <ion-grid>
+      <form #customerForm="ngForm" id="customerForm" name="customerForm">
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-center">
+              <h3>
+                <b>
+                  {{ title }}
+                </b>
+              </h3>
+            </div>
+          </ion-col>
+        </ion-row>
+        <div class="border-top"></div>
+        <ion-item>
+          <ion-label position="fixed"
+            >Type of <br />Customer
+            <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-radio-group
+            value="regular"
+            name="radio-group"
+            (ionChange)="radioGroupChange($event)"
+            #radioGroup
+          >
+            <ion-item>
+              <ion-label>Normal</ion-label>
+              <ion-radio slot="start" value="regular"></ion-radio>
+            </ion-item>
 
-						<ion-item>
-							<ion-label>Event Organizer </ion-label>
-							<ion-radio slot="start" value="event-organiser"></ion-radio>
-						</ion-item>
-					</ion-radio-group>
-				</ion-item>
+            <ion-item>
+              <ion-label>Event Organizer </ion-label>
+              <ion-radio slot="start" value="event-organiser"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
 
-				<ion-item>
-					<ion-label position="fixed"
-						>Mobile <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="tel"
-						maxlength="10"
-						minlength="10"
-						[value]="customer.phone"
-						ngModel
-						[pattern]="mobilePattern"
-						(input)="getValue($event)"
-						name="mobile"
-						placeholder="Whatsapp Number"
-						#mobile="ngModel"
-						required
-						>+91</ion-input
-					>
-					<div
-						*ngIf="
-							mobile.invalid &&
-							(mobile.dirty || mobile.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!mobile.errors.required">
-							<ion-text color="danger"> Mobile is required.</ion-text>
-						</div>
-						<div
-							*ngIf="
-								mobile.errors.minlength ||
-								mobile.errors.maxlength ||
-								mobile.errors.pattern
-							"
-						>
-							<ion-text color="danger"> Invalid Number</ion-text>
-						</div>
-					</div>
-				</ion-item>
+        <ion-item>
+          <ion-label position="fixed"
+            >Mobile <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="tel"
+            maxlength="10"
+            minlength="10"
+            [value]="customer.phone"
+            ngModel
+            [pattern]="mobilePattern"
+            (input)="getValue($event)"
+            name="mobile"
+            placeholder="Whatsapp Number"
+            #mobile="ngModel"
+            required
+            >+91</ion-input
+          >
+          <div
+            *ngIf="
+              mobile.invalid &&
+              (mobile.dirty || mobile.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!mobile.errors.required">
+              <ion-text color="danger"> Mobile is required.</ion-text>
+            </div>
+            <div
+              *ngIf="
+                mobile.errors.minlength ||
+                mobile.errors.maxlength ||
+                mobile.errors.pattern
+              "
+            >
+              <ion-text color="danger"> Invalid Number</ion-text>
+            </div>
+          </div>
+        </ion-item>
 
-				<ion-item>
-					<ion-label position="fixed"
-						>Name <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="text"
-						[value]="customer.name"
-						(input)="getValue($event)"
-						name="name"
-						placeholder="Name"
-						ngModel
-						#name="ngModel"
-						maxlength="25"
-						required
-					></ion-input>
-					<div
-						*ngIf="
-							name.invalid &&
-							(name.dirty || name.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!name.errors.required">
-							<ion-text color="danger"> Name is required.</ion-text>
-						</div>
-					</div>
-				</ion-item>
+        <ion-item>
+          <ion-label position="fixed"
+            >Name <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="text"
+            [value]="customer.name"
+            (input)="getValue($event)"
+            name="name"
+            placeholder="Name"
+            ngModel
+            #name="ngModel"
+            maxlength="25"
+            required
+          ></ion-input>
+          <div
+            *ngIf="
+              name.invalid &&
+              (name.dirty || name.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!name.errors.required">
+              <ion-text color="danger"> Name is required.</ion-text>
+            </div>
+          </div>
+        </ion-item>
 
-				<ion-item>
-					<ion-label position="fixed"
-						>City <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="text"
-						[value]="customer.city"
-						(input)="getValue($event)"
-						name="city"
-						ngModel
-						#city="ngModel"
-						required
-						placeholder="City"
-					></ion-input>
+        <ion-item>
+          <ion-label position="fixed"
+            >City <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="text"
+            [value]="customer.city"
+            (input)="getValue($event)"
+            name="city"
+            ngModel
+            #city="ngModel"
+            required
+            placeholder="City"
+          ></ion-input>
 
-					<div
-						*ngIf="
-							city.invalid &&
-							(city.dirty || city.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!city.errors.required">
-							<ion-text color="danger"> City is required.</ion-text>
-						</div>
-					</div>
-				</ion-item>
+          <div
+            *ngIf="
+              city.invalid &&
+              (city.dirty || city.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!city.errors.required">
+              <ion-text color="danger"> City is required.</ion-text>
+            </div>
+          </div>
+        </ion-item>
 
-				<ion-item>
-					<ion-label position="fixed"
-						>Address <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="text"
-						[value]="customer.address"
-						(input)="getValue($event)"
-						name="address"
-						ngModel
-						#address="ngModel"
-						required
-						placeholder="Address"
-					></ion-input>
+        <ion-item>
+          <ion-label position="fixed"
+            >Address <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="text"
+            [value]="customer.address"
+            (input)="getValue($event)"
+            name="address"
+            ngModel
+            #address="ngModel"
+            required
+            placeholder="Address"
+          ></ion-input>
 
-					<div
-						*ngIf="
-							address.invalid &&
-							(address.dirty || address.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!address.errors.required">
-							<ion-text color="danger"> Address is required.</ion-text>
-						</div>
-					</div>
-					  <ion-icon (click)="showMap()" name="pin-outline" slot="end"></ion-icon>
+          <div
+            *ngIf="
+              address.invalid &&
+              (address.dirty || address.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!address.errors.required">
+              <ion-text color="danger"> Address is required.</ion-text>
+            </div>
+          </div>
+          <ion-icon
+            (click)="showMap()"
+            name="pin-outline"
+            slot="end"
+          ></ion-icon>
+        </ion-item>
 
-				</ion-item>
+        <ion-item>
+          <ion-label position="fixed"
+            >Pin Code <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="postal"
+            [value]="customer.pincode"
+            (input)="getValue($event)"
+            ngModel
+            name="pin"
+            #pinCode="ngModel"
+            required
+            minlength="6"
+            maxlength="6"
+            placeholder="Area Pin"
+          ></ion-input>
+          <div
+            *ngIf="
+              pinCode.invalid &&
+              (pinCode.dirty || pinCode.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!pinCode.errors.required">
+              <ion-text color="danger"> Pin Code is required.</ion-text>
+            </div>
+            <div *ngIf="pinCode.errors.minlength || pinCode.errors.maxlength">
+              <ion-text color="danger"> Pin Code must be 6 digit</ion-text>
+            </div>
+          </div>
+        </ion-item>
 
-				<ion-item>
-					<ion-label position="fixed"
-						>Pin Code <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="postal"
-						[value]="customer.pincode"
-						(input)="getValue($event)"
-						ngModel
-						name="pin"
-						#pinCode="ngModel"
-						required
-						minlength="6"
-						maxlength="6"
-						placeholder="Area Pin"
-					></ion-input>
-					<div
-						*ngIf="
-							pinCode.invalid &&
-							(pinCode.dirty || pinCode.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!pinCode.errors.required">
-							<ion-text color="danger"> Pin Code is required.</ion-text>
-						</div>
-						<div *ngIf="pinCode.errors.minlength || pinCode.errors.maxlength">
-							<ion-text color="danger"> Pin Code must be 6 digit</ion-text>
-						</div>
-					</div>
-				</ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-label>Status</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-toggle
+                [(ngModel)]="customer.is_active"
+                name="apple"
+                color="secondary"
+                checked
+              ></ion-toggle>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-				<ion-item>
-					<ion-label position="fixed">Email </ion-label>
-					<ion-input
-						type="email"
-						[value]="customer.email"
-						[pattern]="emailPattern"
-						(input)="getValue($event)"
-						name="email"
-						placeholder="Email"
-						ngModel
-						#email="ngModel"
-					></ion-input>
-				</ion-item>
-
-				<ion-item *ngIf="show">
-					<ion-label position="fixed"
-						>Product <ion-text class="text-danger">*</ion-text></ion-label
-					>
+        <!-- <ion-item>
+					<ion-label position="fixed">Status</ion-label>
 					<ion-select
-						interface="popover"
-						[value]="customer.product_id"
-						(ionChange)="getValue($event)"
-						placeholder="Select Product"
-						ngModel
-						name="product"
-						#product="ngModel"
-						required
+					interface="popover"
+					[value]="customer.product_id"
+					(ionChange)="getValue($event)"
+					placeholder="Select Product"
+					ngModel
+					name="product"
+					#product="ngModel"
+					required
+				>
+					<ion-select-option
+						
+						value="1"
+						></ion-select-option
 					>
-						<ion-select-option
-							*ngFor="let item of products"
-							value="{{ item.product_id }}"
-							>{{ item.name }}{{ item.unit }}</ion-select-option
-						>
-						>
-					</ion-select>
-					<div
-						*ngIf="
-							product.invalid &&
-							(product.dirty || product.touched || customerForm.submitted)
-						"
-						class="valid"
 					>
-						<div [hidden]="!product.errors.required">
-							<ion-text color="danger"> Product is required.</ion-text>
-						</div>
-					</div>
-				</ion-item>
+				</ion-select>
 
-				<ion-item *ngIf="show">
-					<ion-label position="fixed"
-						>Rate <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="number"
-						[value]="customer.rate"
-						(input)="getValue($event)"
-						name="rate"
-						placeholder="Per Jar Rate"
-						ngModel
-						#rate="ngModel"
-						required
-					></ion-input>
-					<div
-						*ngIf="
-							rate.invalid &&
-							(rate.dirty || rate.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!rate.errors.required">
-							<ion-text color="danger"> Rate is required.</ion-text>
-						</div>
-					</div>
-				</ion-item>
+				</ion-item> -->
 
-				<ion-item *ngIf="show">
-					<ion-label position="fixed"
-						>Balance <br />Jar
-						<ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="number"
-						[value]="customer.balance_jar"
-						(input)="getValue($event)"
-						name="jar"
-						placeholder="Existing balance of Jar"
-						ngModel
-						#balance="ngModel"
-						required
-					></ion-input>
-					<div
-						*ngIf="
-							balance.invalid &&
-							(balance.dirty || balance.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!balance.errors.required">
-							<ion-text color="danger"> Jar is required.</ion-text>
-						</div>
-					</div>
-				</ion-item>
+        <ion-item>
+          <ion-label position="fixed">Email </ion-label>
+          <ion-input
+            type="email"
+            [value]="customer.email"
+            [pattern]="emailPattern"
+            (input)="getValue($event)"
+            name="email"
+            placeholder="Email"
+            ngModel
+            #email="ngModel"
+          ></ion-input>
+        </ion-item>
 
-				<ion-item *ngIf="show">
-					<ion-label position="fixed"
-						>Dispensers <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="number"
-						[value]="customer.dispensers"
-						(input)="getValue($event)"
-						name="dispensers"
-						placeholder="Dispensers"
-						ngModel
-						#dispensers="ngModel"
-						required
-					></ion-input>
-					<div
-						*ngIf="
-							dispensers.invalid &&
-							(dispensers.dirty || dispensers.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!dispensers.errors.required">
-							<ion-text color="danger"> Dispensers is required.</ion-text>
-						</div>
-					</div>
-				</ion-item>
+        <ion-item *ngIf="show">
+          <ion-label position="fixed"
+            >Product <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-select
+            interface="popover"
+            [value]="customer.product_id"
+            (ionChange)="getValue($event)"
+            placeholder="Select Product"
+            ngModel
+            name="product"
+            #product="ngModel"
+            required
+          >
+            <ion-select-option
+              *ngFor="let item of products"
+              value="{{ item.product_id }}"
+              >{{ item.name }}{{ item.unit }}</ion-select-option
+            >
+            >
+          </ion-select>
+          <div
+            *ngIf="
+              product.invalid &&
+              (product.dirty || product.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!product.errors.required">
+              <ion-text color="danger"> Product is required.</ion-text>
+            </div>
+          </div>
+        </ion-item>
 
-				<ion-item *ngIf="show">
-					<ion-label position="fixed"
-						>Deposit <ion-text class="text-danger">*</ion-text></ion-label
-					>
-					<ion-input
-						type="number"
-						[value]="customer.deposit"
-						(input)="getValue($event)"
-						name="deposit"
-						placeholder="Deposit"
-						ngModel
-						#deposit="ngModel"
-						required
-					></ion-input>
-					<div
-						*ngIf="
-							deposit.invalid &&
-							(deposit.dirty || deposit.touched || customerForm.submitted)
-						"
-						class="valid"
-					>
-						<div [hidden]="!deposit.errors.required">
-							<ion-text color="danger"> Deposit is required.</ion-text>
-						</div>
-					</div>
-				</ion-item>
+        <ion-item *ngIf="show">
+          <ion-label position="fixed"
+            >Rate <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="number"
+            [value]="customer.rate"
+            (input)="getValue($event)"
+            name="rate"
+            placeholder="Per Jar Rate"
+            ngModel
+            #rate="ngModel"
+            required
+          ></ion-input>
+          <div
+            *ngIf="
+              rate.invalid &&
+              (rate.dirty || rate.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!rate.errors.required">
+              <ion-text color="danger"> Rate is required.</ion-text>
+            </div>
+          </div>
+        </ion-item>
 
-				<p class="ion-text-center">
-					<ion-text color="danger">
-						Balance can't changed once Updated</ion-text
-					>
-				</p>
-				<ion-row>
-					<ion-col>
-						<div class="ion-text-center">
-							<ion-button
-								size="default"
-								color="primary"
-								(click)="onClickOfSubmit(customerForm)"
-							>
-								{{ buttonName }}</ion-button
-							>
-							<ion-button
-								size="default"
-								color="danger"
-								class="ion-margin-horizontal"
-								(click)="onClickOfCancel()"
-								>Cancel</ion-button
-							>
-						</div>
-					</ion-col>
-				</ion-row>
-			</form>
-		</ion-grid>
-	</ion-list>
+        <ion-item *ngIf="show">
+          <ion-label position="fixed"
+            >Balance <br />Jar
+            <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="number"
+            [value]="customer.balance_jar"
+            (input)="getValue($event)"
+            name="jar"
+            placeholder="Existing balance of Jar"
+            ngModel
+            #balance="ngModel"
+            required
+          ></ion-input>
+          <div
+            *ngIf="
+              balance.invalid &&
+              (balance.dirty || balance.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!balance.errors.required">
+              <ion-text color="danger"> Jar is required.</ion-text>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-item *ngIf="show">
+          <ion-label position="fixed"
+            >Dispensers <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="number"
+            [value]="customer.dispensers"
+            (input)="getValue($event)"
+            name="dispensers"
+            placeholder="Dispensers"
+            ngModel
+            #dispensers="ngModel"
+            required
+          ></ion-input>
+          <div
+            *ngIf="
+              dispensers.invalid &&
+              (dispensers.dirty || dispensers.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!dispensers.errors.required">
+              <ion-text color="danger"> Dispensers is required.</ion-text>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-item *ngIf="show">
+          <ion-label position="fixed"
+            >Deposit <ion-text class="text-danger">*</ion-text></ion-label
+          >
+          <ion-input
+            type="number"
+            [value]="customer.deposit"
+            (input)="getValue($event)"
+            name="deposit"
+            placeholder="Deposit"
+            ngModel
+            #deposit="ngModel"
+            required
+          ></ion-input>
+          <div
+            *ngIf="
+              deposit.invalid &&
+              (deposit.dirty || deposit.touched || customerForm.submitted)
+            "
+            class="valid"
+          >
+            <div [hidden]="!deposit.errors.required">
+              <ion-text color="danger"> Deposit is required.</ion-text>
+            </div>
+          </div>
+        </ion-item>
+
+        <p class="ion-text-center">
+          <ion-text color="danger">
+            Balance can't changed once Updated</ion-text
+          >
+        </p>
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-center">
+              <ion-button
+                size="default"
+                color="primary"
+                (click)="onClickOfSubmit(customerForm)"
+              >
+                {{ buttonName }}</ion-button
+              >
+              <ion-button
+                size="default"
+                color="danger"
+                class="ion-margin-horizontal"
+                (click)="onClickOfCancel()"
+                >Cancel</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-grid>
+  </ion-list>
 </ion-card>

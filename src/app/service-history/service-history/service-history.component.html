@@ -1,10 +1,10 @@
 <ion-header [translucent]="true" primary>
   <ion-toolbar color="primary">
-    <ion-buttons *ngIf="!showSearchbar" slot="start">
+    <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <ion-row>
-      <ion-col *ngIf="!showSearchbar">
+      <ion-col>
         <div class="ion-text mt-3"><h5>Service History</h5></div>
       </ion-col>
     </ion-row>
@@ -21,26 +21,17 @@
     </thead>
     <tbody class="tb table">
       <tr
+        *ngFor="let item of serviceHistory"
         class="text-center"
         style="border-bottom: 1px solid rgb(221, 221, 221)"
       >
-        <td style="font-weight: normal !important">11-12-2021</td>
         <td style="font-weight: normal !important">
-          1. Boiler Clean <br />
-          2. Filter replace <br />
-          3. Engine clean
+          {{ item.created_at | date: 'dd/MM/yyyy' }}
         </td>
-        <td style="font-weight: normal !important">Samrat Waman</td>
-      </tr>
-
-      <tr class="text-center">
-        <td style="font-weight: normal !important">11-12-2021</td>
         <td style="font-weight: normal !important">
-          1. Boiler Clean <br />
-          2. Filter replace <br />
-          3. Engine clean
+          {{ item.material_issued }}
         </td>
-        <td style="font-weight: normal !important">Samrat Waman</td>
+        <td style="font-weight: normal !important">{{ item.engineerName }}</td>
       </tr>
     </tbody>
   </table>

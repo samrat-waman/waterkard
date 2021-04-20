@@ -14,6 +14,9 @@ import { AgmCoreModule } from '@agm/core';
 import { MapPage } from './map/map.page';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 @NgModule({
 	declarations: [AppComponent, MapPage],
 	entryComponents: [],
@@ -36,7 +39,11 @@ import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
 		SplashScreen,
 		PDFGenerator,
 		NativeGeocoder,
+		PhotoViewer,
+
 		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+		File,
+		FileOpener
 	],
 	bootstrap: [AppComponent],
 })

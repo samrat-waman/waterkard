@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ServiceRequestRoutingModule } from './service-request-routing.module';
 import { ServiceRequestComponent } from './service-request/service-request.component';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     CommonModule,
     ServiceRequestRoutingModule,
-    IonicModule
+    IonicModule,
+    FormsModule
   ]
 })
 export class ServiceRequestModule { }

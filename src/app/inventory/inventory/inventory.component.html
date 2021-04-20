@@ -194,7 +194,7 @@
         >
           <ion-text color="dark">
             <div>
-              <b>{{ inventoryDetails.today_calculated_jar_unloaded }}</b>
+              <b>{{ inventoryDetails.today_unloaded }}</b>
             </div>
           </ion-text>
         </ion-col>
@@ -243,8 +243,16 @@
           <ion-text color="dark">
             <div>
               <b>{{ inventoryDetails.today_empty_collected }}</b>
+              <br />
             </div>
           </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngIf="inventory.date === today">
+          <ion-button size="default" color="primary" (click)="unloadJar()">
+            Unload Jar</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-card-header>

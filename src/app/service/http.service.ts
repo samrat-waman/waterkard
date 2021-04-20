@@ -10,8 +10,8 @@ import { map, switchMap, take } from "rxjs/operators";
 export class HttpService {
 	token: any;
 	driver = true;
-	url = "http://ecommapi3.rsi4apps.com/api/";
-	serverUrl = "http://ecommapi3.rsi4apps.com/api/";
+	url = "https://ecommapi3.rsi4apps.com/api/";
+	serverUrl = "https://ecommapi3.rsi4apps.com/api/";
 	// serverUrl='http://ecommapi2.rsi4apps.com/api/'
 
 	constructor(private httpClient: HttpClient, private storage: Storage) { }
@@ -33,6 +33,22 @@ export class HttpService {
 			const url = this.url + path;
 			// return this.httpClient.post(url, data);
 			return this.httpClient.post(url, data, { headers: httpHeaders });
+		}));
+	}
+
+
+	get(data, path) {
+		return from(this.gett("token")).pipe(switchMap(result => {
+			if (result != null) {
+				this.token = result;
+			}
+			const httpHeaders = new HttpHeaders({
+				"content-type": "application/json",
+				Authorization: "Bearer " + this.token,
+			});
+			const url = this.url + path;
+			// return this.httpClient.post(url, data);
+			return this.httpClient.get(url, { headers: httpHeaders });
 		}));
 	}
 

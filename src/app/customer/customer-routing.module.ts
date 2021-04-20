@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { AssignCustomerListComponent } from './assign-customer-list/assign-customer-list.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { InactiveCustomerComponent } from './inactive-customer/inactive-customer.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'add-customer',
     component: AddCustomerComponent
+  },
+
+  {
+    path: 'inactive-customers',
+    component: InactiveCustomerComponent
   },
   {
     path: 'customer-groups',

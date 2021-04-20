@@ -21,11 +21,10 @@ export class PaymentHistoryComponent implements OnInit {
 		private httpService: HttpService,
 		public alertController: AlertController,
 		public modalController: ModalController
-	) {}
+	) { }
 
 	ngOnInit() {
 		console.log(this.route);
-
 		this.id = this.route.snapshot.params.id;
 		console.log(this.id);
 		this.getPaymentHistory(this.id);

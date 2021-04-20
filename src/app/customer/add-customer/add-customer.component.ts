@@ -32,6 +32,7 @@ export class AddCustomerComponent implements OnInit {
 		product_id: '',
 		rate: '',
 		deposit: '',
+		is_active: '',
 		city: '',
 		address: '',
 		pincode: '',
@@ -62,7 +63,7 @@ export class AddCustomerComponent implements OnInit {
 		private nativeGeocoder: NativeGeocoder,
 		private alertService: AlertService,
 		private loaderService: LoadingService
-	) {}
+	) { }
 
 	ngOnInit() {
 		this.customer.customer_type = 'regular';
@@ -90,7 +91,7 @@ export class AddCustomerComponent implements OnInit {
 					(this.customer.customer_type =
 						res.data.info.customer.customer_type),
 					console.log(this.customer.customer_type);
-
+				this.customer.is_active = res.data.info.is_active;
 				(this.customer.email = res.data.info.email),
 					(this.customer.city = res.data.info.customer.city),
 					(this.customer.address = res.data.info.customer.address),
@@ -197,8 +198,8 @@ export class AddCustomerComponent implements OnInit {
 
 	async showMap() {
 		let componentProps;
-		if(this.coreService.getDriverState()) {
-			componentProps = {isEdit: true, lngLat: [this.customer.longitude, this.customer.latitude]};
+		if (this.coreService.getDriverState()) {
+			componentProps = { isEdit: true, lngLat: [this.customer.longitude, this.customer.latitude] };
 		}
 		const modal = await this.modalController.create({
 			component: MapPage,
@@ -215,7 +216,7 @@ export class AddCustomerComponent implements OnInit {
 					res.data.coords[1]
 				);
 				console.log(geocodeData);
-				if(geocodeData) {
+				if (geocodeData) {
 					const {
 						subThoroughfare,
 						thoroughfare,
@@ -249,7 +250,7 @@ export class AddCustomerComponent implements OnInit {
 			return null;
 		})
 		console.log(result);
-		if(!result) {
+		if (!result) {
 			this.alertService.showAlert('An error occured while getting your location. Try again.');
 			return result;
 		}

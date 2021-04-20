@@ -1,0 +1,102 @@
+<ion-header [translucent]="true" primary>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text mt-3"><h5>My Profile</h5></div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<div class="row mt-3"></div>
+<ion-content class="text-center">
+  <img src="../assets/images/profile.png" height="100" width="100" />
+  <ion-item> </ion-item>
+  <ion-item>
+    <ion-icon name="person" color="primary"></ion-icon>
+    <ion-input
+      class="ion-margin-horizontal native-input sc-ion-input-md"
+      name="name"
+      type="text"
+      [(ngModel)]="reseller.name"
+      placeholder="Firm/Shop/Company Name"
+      required
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="earth" color="primary"></ion-icon>
+    <ion-input
+      class="ion-margin-horizontal native-input sc-ion-input-md"
+      name="country"
+      [(ngModel)]="reseller.country"
+      type="text"
+      placeholder="Country"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="earth" color="primary"></ion-icon>
+    <ion-input
+      class="ion-margin-horizontal native-input sc-ion-input-md"
+      name="state"
+      type="text"
+      [(ngModel)]="reseller.state"
+      placeholder="State"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="earth" color="primary"></ion-icon>
+    <ion-input
+      class="ion-margin-horizontal native-input sc-ion-input-md"
+      name="city"
+      type="text"
+      [(ngModel)]="reseller.city"
+      placeholder="City"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="call" color="primary"></ion-icon>
+    <ion-input
+      class="ion-margin-horizontal native-input sc-ion-input-md"
+      name="phone"
+      [(ngModel)]="reseller.phone"
+      type="text"
+      maxlength="10"
+      placeholder="Phone Number"
+      required
+    ></ion-input>
+  </ion-item>
+  <!--  -->
+  <ion-item>
+    <ion-icon name="mail" color="primary"></ion-icon>
+    <ion-input
+      class="ion-margin-horizontal native-input sc-ion-input-md"
+      name="email"
+      type="email"
+      [(ngModel)]="reseller.email"
+      placeholder="Email"
+    ></ion-input>
+  </ion-item>
+
+  <ion-button
+    class="ion-margin-top md"
+    size="medium"
+    type="submit"
+    (click)="onClickOfSubmit()"
+    >Submit</ion-button
+  >
+
+  <ion-button
+    class="ion-margin-top md ml-2"
+    size="medium"
+    color="danger"
+    type="submit"
+    [routerLink]="['/Cards']" routerLinkActive="router-link-active" 
+    >Cancel</ion-button
+  >
+</ion-content>

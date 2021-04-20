@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
 
+
+  {
+    path: 'Profile',
+    loadChildren: () => import('./my-profile/my-profile.module').then(m => m.MyProfileModule)
+  },
   {
     path: 'Cards',
     loadChildren: () => import('./cards/cards.module').then(m => m.CardsModule)
@@ -87,6 +92,11 @@ const routes: Routes = [
   {
     path: 'notification-detail',
     loadChildren: () => import('./notification-detail/notification-detail.module').then(m => m.NotificationDetailPageModule)
+  },
+
+  {
+    path: 'Profile-Verification',
+    loadChildren: () => import('./profile-verification/profile-verification.module').then(m => m.ProfileVerificationModule)
   },
   {
     path: 'map',

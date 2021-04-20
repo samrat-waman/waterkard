@@ -17,7 +17,7 @@ export class CustomerListComponent implements OnInit {
 		public modalController: ModalController,
 		private httpService: HttpService,
 		public alertController: AlertController
-	) {}
+	) { }
 
 	ngOnInit() {
 		this.getCustomers();
@@ -36,6 +36,8 @@ export class CustomerListComponent implements OnInit {
 			console.log(res.data.info.data);
 			this.customers = res.data.info.data;
 			console.log("calll");
+		}, error => {
+			console.log('error:', error)
 		});
 	}
 	async addCustomer() {

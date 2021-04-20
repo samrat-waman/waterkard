@@ -15,34 +15,56 @@
   <!-- https://ionicframework.com/docs/native/camera -->
   <div class="row">
     <div class="col">
-      <ion-item class="text-center">
-        <ion-label position="fixed">Problem</ion-label>
-        <ion-select interface="popover" placeholder="Select Problem">
-        </ion-select>
-      </ion-item>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <ion-item class="text-center">
-        <ion-label position="fixed">Time</ion-label>
-        <ion-select interface="popover" placeholder="Select Technician Time">
-        </ion-select>
-      </ion-item>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <ion-item class="text-center">
-        <ion-label position="fixed">Description</ion-label>
-      </ion-item>
       <ion-item>
-        <ion-textarea
-          placeholder="Enter more information here..."
-        ></ion-textarea>
+        <ion-label position="fixed">Problem</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="serviceRequest.complaint_text"
+          placeholder="Write Problem"
+        >
+        </ion-input>
       </ion-item>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <ion-item>
+        <ion-label position="fixed">Time</ion-label>
+        <ion-input
+          [(ngModel)]="serviceRequest.job"
+          type="text"
+          placeholder="Time Required"
+        >
+        </ion-input>
+      </ion-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ion-item>
+        <ion-label position="fixed">Description</ion-label>
+        <ion-textarea
+          type="text"
+          [(ngModel)]="serviceRequest.description"
+          placeholder="Description"
+        >
+        </ion-textarea>
+      </ion-item>
+    </div>
+  </div>
+
+  <ion-item> <ion-label>Uplod Photo</ion-label> </ion-item>
+  <ion-item>
+    <input
+      placeholder="address"
+      name="file"
+      id="file"
+      type="file"
+      #f
+      (change)="uplodImage($event)"
+      accept="image/x-png,image/bmp,image/jpeg"
+    />
+  </ion-item>
   <ion-row>
     <ion-col>
       <div class="ion-text-center">

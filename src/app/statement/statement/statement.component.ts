@@ -3,6 +3,12 @@ import { Component, ElementRef, ViewChild, OnInit } from "@angular/core";
 import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Platform } from '@ionic/angular';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import pdfMake from 'pdfmake/build/pdfmake';
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+// pdfMake.vfs = pdfFonts.pdfmake.vfs;
 @Component({
   selector: 'app-statement',
   templateUrl: './statement.component.html',
@@ -29,7 +35,8 @@ export class StatementComponent implements OnInit {
   customers = [];
   bottleCardStatement = [];
   htmlSample: any;
-  constructor(private httpService: HttpService, private pdfGenerator: PDFGenerator,) { }
+  pdfObj = null;
+  constructor(private httpService: HttpService, private pdfGenerator: PDFGenerator, private plt: Platform, private file: File, private fileOpener: FileOpener) { }
 
   ngOnInit() {
     var today = new Date();
@@ -44,6 +51,42 @@ export class StatementComponent implements OnInit {
   }
 
   generatePDF() {
+
+    print();
+    // console.log("click");
+    // var docDefination = {
+    //   content: [
+    //     { text: 'RIMINDER', style: 'header' },
+    //     { text: 'FORM', style: 'subheader' }
+
+    //   ],
+    //   style: {
+    //     header: {
+    //       fontSize: 18,
+    //       bold: true,
+    //     },
+    //     subheader: {
+    //       fontSize: 14,
+    //       bold: true,
+    //       margin: [0, 15, 0, 0]
+    //     }
+    //   }
+    // }
+    // this.pdfObj = pdfMake.createPdf(docDefination);
+
+    // if (this.plt.is('cordova')) {
+    //   console.log("cordova");
+
+    // }
+    // else {
+
+
+    // this.pdfObj.downlod();
+    // }
+
+  }
+
+  generatePDFd() {
     var data = document.getElementById('containToConvert');
     html2canvas(data).then(canvas => {
       var imgWidth = 208;

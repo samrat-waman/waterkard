@@ -3,6 +3,22 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
+          <ion-item class="ml-5" style="--border-style: none !important">
+            <img
+              src="../assets/images/profile.png"
+              class="ml-5"
+              height="80"
+              width="80"
+            />
+          </ion-item>
+          <div class="row">
+            <div class="col text-center mb-2 mt-2">
+              <b>
+                {{ userName | titlecase }}
+              </b>
+            </div>
+          </div>
+
           <ion-list-header>WaterKard</ion-list-header>
 
           <ion-menu-toggle

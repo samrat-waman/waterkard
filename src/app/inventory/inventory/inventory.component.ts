@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from "@ionic/angular";
 import { AddInventoryComponent } from '../add-inventory/add-inventory.component';
 import { HttpService } from "../../service/http.service";
+import { UnloadInventoryComponent } from '../unload-inventory/unload-inventory.component';
 
 @Component({
   selector: 'app-inventory',
@@ -22,6 +23,8 @@ export class InventoryComponent implements OnInit {
     total_delivered: '',
     total_empty_collected: '',
     total_loaded: '',
+    total_unloaded: '',
+    today_unloaded: ''
   };
   showInventoryDetails = false;
   today: any;
@@ -45,6 +48,19 @@ export class InventoryComponent implements OnInit {
     });
 
   }
+
+  async unloadJar() {
+    const modal = await this.modalController.create({
+      component: UnloadInventoryComponent,
+      componentProps: { id: this.inventory.driver_user_id },
+    });
+
+    modal.onDidDismiss().then((data) => {
+      this.getInventoryDetails();
+    });
+    return await modal.present();
+  }
+
   parseDate(dateString: string): Date {
     if (dateString) {
       this.inventory.date = dateString;

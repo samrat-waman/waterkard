@@ -1,0 +1,73 @@
+<ion-header [translucent]="true" primary>
+  <ion-toolbar color="primary">
+    <ion-buttons *ngIf="!showSearchbar" slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col *ngIf="!showSearchbar" class="col-9">
+        <div class="ion-text mt-3"><h5>Profile Verification</h5></div>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-end mt-1">
+          <ion-searchbar
+            *ngIf="showSearchbar"
+            showCancelButton="always"
+            [(ngModel)]="searchedText"
+            (ionChange)="onChangeOfSearch()"
+            (ionCancel)="showSearchbar = false"
+            placeholder="Search"
+          ></ion-searchbar>
+          <ion-buttons slot="end">
+            <ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+              <ion-icon slot="icon-only" name="search"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <table class="table">
+    <thead class="thead-light">
+      <tr class="text-center">
+        <th>Name</th>
+        <th>Id_Proof</th>
+        <th>Add_Proof</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of drivers">
+        <td>{{ item.name }}</td>
+        <td (click)="onClickOfImage(item.user_id, item.id_proof)">
+          <img
+            (click)="
+              clickImage(
+                'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+              )
+            "
+            src="http://ecommapi3.rsi4apps.com/public/img/user/{{
+              item.user_id
+            }}/{{ item.id_proof }}"
+            height="35"
+            width="35"
+          />
+        </td>
+        <td>
+          <img
+            src="http://ecommapi3.rsi4apps.com/public/img/user/{{
+              item.user_id
+            }}/{{ item.address_proof }}"
+            height="35"
+            width="35"
+          />
+        </td>
+        <td>
+          <img src="../../../assets/images/check.png" height="20" width="20" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

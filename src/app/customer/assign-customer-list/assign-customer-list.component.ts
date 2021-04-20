@@ -67,8 +67,11 @@ export class AssignCustomerListComponent implements OnInit {
   }
 
   async showMap() {
+    console.log('clicked map');
+
     const modal = await this.modalController.create({
       component: MapPage,
+
     });
 
     await modal.present();

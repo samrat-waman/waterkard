@@ -1,0 +1,32 @@
+<ion-header [translucent]="true" primary>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col class="col-8">
+        <div class="ion-text mt-3">
+          <h5>Inactive Customers</h5>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <table class="table">
+    <thead class="thead-light">
+      <tr class="text-center">
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let customer of customers" class="tb">
+      <tr *ngIf="customer.is_active == 0">
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.customer.address }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

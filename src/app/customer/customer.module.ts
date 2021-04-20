@@ -8,8 +8,9 @@ import { AssignCustomerListComponent } from './assign-customer-list/assign-custo
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { CustomerProductComponent } from './customer-product/customer-product.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { InactiveCustomerComponent } from './inactive-customer/inactive-customer.component';
 @NgModule({
-  declarations: [AssignCustomerListComponent, AddCustomerComponent, CustomerProductComponent, CustomerListComponent],
+  declarations: [AssignCustomerListComponent, AddCustomerComponent, InactiveCustomerComponent, CustomerProductComponent, CustomerListComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

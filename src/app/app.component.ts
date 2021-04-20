@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 	public selectedIndex = 0;
 	hide = true;
 	driver = true;
+	userName = '';
 	// appPages: Array<{
 	// 	title: string;
 	// 	url: string;
@@ -101,6 +102,7 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.getUserInformation();
 		console.log(this.httpService.driver);
 
 		// this.userMe();
@@ -110,6 +112,13 @@ export class AppComponent implements OnInit {
 		// 		(page) => page.title.toLowerCase() === path.toLowerCase()
 		// 	);
 		// }
+	}
+
+	getUserInformation() {
+		this.httpService.get('', 'user/me').subscribe((res: any) => {
+			this.userName = res.data.me.name;
+
+		})
 	}
 
 	// Ctrl + A -- Ctrl + K ---- Ctrl + F

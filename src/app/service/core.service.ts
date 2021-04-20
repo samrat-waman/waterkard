@@ -22,6 +22,13 @@ export class CoreService {
 		icon: string;
 		hideFrom: Array<string>;
 	}> = [
+
+			{
+				title: "My Profile",
+				url: "/Profile",
+				icon: "profile",
+				hideFrom: [driver],
+			},
 			{
 				title: "Cards",
 				url: "/Cards",
@@ -89,6 +96,13 @@ export class CoreService {
 				hideFrom: [driver],
 			},
 			{
+				title: "Payment-Report",
+				url: "/Report/payment-report",
+				icon: "report",
+				hideFrom: [driver],
+			},
+
+			{
 				title: "Invoice",
 				url: "/Invoice",
 				icon: "invoice",
@@ -112,6 +126,20 @@ export class CoreService {
 				icon: "bell",
 				hideFrom: [],
 			},
+
+			{
+				title: "Inactive Users",
+				url: "/Customers/inactive-customers",
+				icon: "team",
+				hideFrom: [],
+			},
+			{
+				title: "Profile Verification",
+				url: "/Profile-Verification",
+				icon: "verification",
+				hideFrom: [driver],
+			},
+
 			{
 				title: "Service Request",
 				url: "/Service-Request",
@@ -128,7 +156,7 @@ export class CoreService {
 				title: "Feedback",
 				url: "/Feedback",
 				icon: "feedback",
-				hideFrom: [driver],
+				hideFrom: [],
 			},
 			{
 				title: "Help and Support",
@@ -137,11 +165,17 @@ export class CoreService {
 				hideFrom: [],
 			},
 			// {
-			//  title: "Shop",
-			//  url: "/shop",
-			//  icon: "logout",
-			//  hideFrom: true,
+			// 	title: "Shop",
+			// 	url: "/shop",
+			// 	icon: "logout",
+			// 	hideFrom: [],
 			// },
+			{
+				title: "Profile",
+				url: "/Profile/driver-profile",
+				icon: "profile",
+				hideFrom: [vendor],
+			},
 			{
 				title: "Logout",
 				url: "/auth",
